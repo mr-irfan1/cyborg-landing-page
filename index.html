@@ -1,0 +1,2781 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techfest | IIT Bombay - Asia's Largest Science & Technology Festival</title>
+    
+    <!-- Meta SEO & Open Graph -->
+    <meta name="description" content="IIT Bombay's Techfest 30th Edition - An Aetherial Renaissance. 16th - 18th December. Asia's Largest Science and Technology Festival.">
+    <meta name="keywords" content="Techfest, Techfest IIT Bombay, An Aetherial Renaissance, Robowars, Workshops, Competitions, Ignite, Accommodation, Events, CES, Contact Us, About Us, Profile">
+    <meta property="og:title" content="Techfest | IIT Bombay">
+    <meta property="og:description" content="Welcome to An Aetherial Renaissance - 30th Edition">
+
+    <!-- Favicon & Touch Icon -->
+    <link rel="icon" type="image/png" href="assets/techfest_logo.png">
+    <link rel="apple-touch-icon" href="assets/techfest_logo.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cinzel Decorative, Cinzel, Space Grotesk, Rajdhani -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700;800;900&family=MedievalSharp&family=Rajdhani:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Three.js (r128) for 3D Aetherial Particle Motes & Fire -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tf: {
+                            dark: '#080c14',
+                            nav: 'rgba(15, 23, 42, 0.75)',
+                            gold: '#ffd269',
+                            goldLight: '#ffe8a3',
+                            cyan: '#4de8ff',
+                            blueGlow: '#00d2ff',
+                            slate: '#94a3b8'
+                        }
+                    },
+                    fontFamily: {
+                        cinzelDeco: ['"Cinzel Decorative"', 'serif'],
+                        cinzel: ['"Cinzel"', 'serif'],
+                        medieval: ['"MedievalSharp"', 'cursive'],
+                        grotesk: ['"Space Grotesk"', 'sans-serif'],
+                        rajdhani: ['"Rajdhani"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --tf-cyan: #4de8ff;
+            --tf-gold: #ffd269;
+            --tf-blue-glow: #00d2ff;
+        }
+
+        body {
+            background-color: #060911;
+            color: #e2e8f0;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            user-select: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060911;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(77, 232, 255, 0.4);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4de8ff;
+        }
+
+        /* Top Chamfered Metallic Nav Frame */
+        .techfest-top-frame {
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.88) 0%, rgba(15, 23, 42, 0.96) 100%);
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            border-top: none;
+            clip-path: polygon(
+                0 0, 
+                100% 0, 
+                calc(100% - 18px) 100%, 
+                calc(100% - 35px) 100%, 
+                calc(100% - 45px) 85%, 
+                calc(100% - 90px) 85%, 
+                calc(100% - 100px) 100%, 
+                100px 100%, 
+                90px 85%, 
+                45px 85%, 
+                35px 100%, 
+                18px 100%
+            );
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        /* Glassmorphic Sidebars */
+        .glass-sidebar {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Dock button active glow */
+        .dock-btn.active-dock {
+            color: #4de8ff !important;
+            transform: scale(1.15);
+        }
+        .dock-btn.active-dock i {
+            color: #4de8ff !important;
+            filter: drop-shadow(0 0 10px #4de8ff);
+        }
+
+        /* Metallic Titles */
+        .techfest-title-text {
+            font-family: 'Cinzel Decorative', serif;
+            background: linear-gradient(180deg, #ffffff 0%, #b8d9f5 45%, #5a8ab8 75%, #2a4c70 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 18px rgba(77, 232, 255, 0.65)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.9));
+        }
+
+        .profile-title-text {
+            font-family: 'Cinzel Decorative', serif;
+            background: linear-gradient(180deg, #ffffff 0%, #ffdca8 50%, #d97706 80%, #78350f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.7)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95));
+        }
+
+        .events-title-text {
+            font-family: 'Cinzel Decorative', serif;
+            background: linear-gradient(180deg, #ffffff 0%, #a5f3fc 45%, #0284c7 75%, #082f49 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(6, 182, 212, 0.75)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95));
+        }
+
+        .ces-title-text {
+            font-family: 'Cinzel Decorative', serif;
+            background: linear-gradient(180deg, #ffffff 0%, #67e8f9 45%, #06b6d4 75%, #0e7490 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(6, 182, 212, 0.85)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95));
+        }
+
+        .contact-title-text {
+            font-family: 'Cinzel Decorative', serif;
+            background: linear-gradient(180deg, #ffffff 0%, #e9d5ff 45%, #9333ea 75%, #3b0764 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.75)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95));
+        }
+
+        .about-title-text {
+            font-family: 'Cinzel Decorative', serif;
+            background: linear-gradient(180deg, #ffffff 0%, #fef08a 45%, #ca8a04 75%, #713f12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(234, 179, 8, 0.75)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95));
+        }
+
+        .accommodation-title-text {
+            font-family: 'Cinzel Decorative', serif;
+            background: linear-gradient(180deg, #ffffff 0%, #fed7aa 45%, #ea580c 75%, #7c2d12 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(249, 115, 22, 0.75)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95));
+        }
+
+        .workshops-title-text {
+            font-family: 'Cinzel Decorative', serif;
+            background: linear-gradient(180deg, #ffffff 0%, #a5f3fc 45%, #0891b2 75%, #164e63 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(6, 182, 212, 0.8)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95));
+        }
+
+        .competitions-title-text {
+            font-family: 'Cinzel Decorative', serif;
+            background: linear-gradient(180deg, #ffffff 0%, #fecaca 45%, #dc2626 75%, #7f1d1d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.85)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95));
+        }
+
+        .ignite-title-text {
+            font-family: 'Cinzel Decorative', serif;
+            background: linear-gradient(180deg, #ffffff 0%, #f5d0fe 45%, #c026d3 75%, #701a75 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(217, 70, 239, 0.85)) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.95));
+        }
+
+        .sword-glow {
+            filter: drop-shadow(0 0 12px #00d2ff) drop-shadow(0 0 24px #0088ff);
+        }
+
+        /* Pulsing scroll indicator */
+        @keyframes scroll-bounce {
+            0%, 100% { transform: translateY(0); opacity: 0.8; }
+            50% { transform: translateY(8px); opacity: 0.3; }
+        }
+        .scroll-indicator-line {
+            animation: scroll-bounce 2s ease-in-out infinite;
+        }
+
+        /* Three.js Canvas Overlay */
+        #aetherial-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Ornate Golden Mechanical Card Frame */
+        .golden-tech-frame {
+            background: linear-gradient(145deg, rgba(20, 26, 42, 0.82) 0%, rgba(10, 15, 28, 0.92) 100%);
+            border: 2px solid #eab308;
+            box-shadow: 0 0 22px rgba(234, 179, 8, 0.35), inset 0 0 16px rgba(234, 179, 8, 0.12);
+            position: relative;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .golden-tech-frame:hover {
+            box-shadow: 0 0 35px rgba(234, 179, 8, 0.55), inset 0 0 25px rgba(234, 179, 8, 0.2);
+            transform: translateY(-5px);
+            border-color: #fde047;
+        }
+
+        .golden-tech-frame::before {
+            content: '';
+            position: absolute;
+            top: -6px; left: -6px;
+            width: 18px; height: 18px;
+            border-top: 3px solid #fde047;
+            border-left: 3px solid #fde047;
+            pointer-events: none;
+        }
+
+        .golden-tech-frame::after {
+            content: '';
+            position: absolute;
+            bottom: -6px; right: -6px;
+            width: 18px; height: 18px;
+            border-bottom: 3px solid #fde047;
+            border-right: 3px solid #fde047;
+            pointer-events: none;
+        }
+
+        .rivet-corner {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #fde047;
+            border-radius: 50%;
+            box-shadow: 0 0 6px #fde047;
+        }
+
+        /* Profile & Custom View Cards */
+        .profile-fire-card {
+            background: linear-gradient(135deg, rgba(35, 10, 10, 0.65) 0%, rgba(15, 5, 5, 0.85) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(239, 68, 68, 0.1);
+        }
+
+        .view-themed-card {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(6, 10, 20, 0.90) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75);
+        }
+
+        .red-tab-badge {
+            background: #dc2626;
+            color: #ffffff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            padding: 3px 14px;
+            clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .cyan-tab-badge {
+            background: #0891b2;
+            color: #ffffff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            padding: 3px 14px;
+            clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .purple-tab-badge {
+            background: #7c3aed;
+            color: #ffffff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            padding: 3px 14px;
+            clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .gold-tab-badge {
+            background: #d97706;
+            color: #ffffff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            padding: 3px 14px;
+            clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* Smooth View Switching Transition Animation */
+        .fade-in-view {
+            animation: fadeInSmooth 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInSmooth {
+            0% { opacity: 0; transform: scale(0.985); }
+            100% { opacity: 1; transform: scale(1.0); }
+        }
+
+        /* Modal styling */
+        .tf-modal-panel {
+            background: rgba(11, 17, 32, 0.94);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(77, 232, 255, 0.35);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 210, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-[#060911] text-slate-100 antialiased selection:bg-tf-cyan selection:text-black">
+
+    <!-- FIXED PERSISTENT TOP HEADER & NAVIGATION BAR -->
+    <header class="fixed top-0 left-0 right-0 z-50 w-full px-4 sm:px-8 pt-4 flex items-start justify-between pointer-events-none">
+        
+        <!-- Left Logo: Official TF™ Logo -->
+        <a href="javascript:switchView('main-site-view')" class="flex items-center space-x-1 group pt-1 pointer-events-auto" title="Techfest IIT Bombay">
+            <div class="relative flex items-center">
+                <img src="assets/techfest_logo.png" alt="Techfest IIT Bombay Logo" class="h-9 sm:h-11 w-auto object-contain filter drop-shadow-[0_2px_14px_rgba(255,255,255,0.6)] group-hover:scale-105 transition-transform duration-300">
+            </div>
+        </a>
+
+        <!-- Center: Chamfered Metallic Nav Frame (ACCOMMODATION, WORKSHOPS, COMPETITIONS, IGNITE) -->
+        <div class="hidden md:flex items-center justify-center pointer-events-auto">
+            <nav class="techfest-top-frame px-8 py-3.5 flex items-center space-x-8 lg:space-x-12 text-xs font-mono tracking-widest uppercase">
+                <button onclick="switchView('accommodation-page-view')" class="text-slate-300 hover:text-white transition duration-200 hover:drop-shadow-[0_0_8px_#ffffff] font-semibold">
+                    ACCOMMODATION
+                </button>
+
+                <button onclick="switchView('workshops-page-view')" class="text-slate-300 hover:text-white transition duration-200 hover:drop-shadow-[0_0_8px_#ffffff] font-semibold">
+                    WORKSHOPS
+                </button>
+
+                <button onclick="switchView('competitions-page-view')" class="text-slate-300 hover:text-white transition duration-200 hover:drop-shadow-[0_0_8px_#ffffff] font-semibold">
+                    COMPETITIONS
+                </button>
+
+                <button onclick="switchView('ignite-page-view')" class="text-slate-300 hover:text-white transition duration-200 hover:drop-shadow-[0_0_8px_#ffffff] font-semibold">
+                    IGNITE
+                </button>
+            </nav>
+        </div>
+
+        <!-- Right: Dynamic User Profile / Back to Home Pill Button -->
+        <div class="flex items-center space-x-3 pointer-events-auto" id="top-right-user-container">
+            <!-- Normal Main Mode: "MOHAMMAD" -->
+            <button id="user-profile-btn" onclick="switchView('profile-page-view')" class="glass-sidebar px-5 py-2.5 rounded-xl border border-white/20 text-xs font-mono tracking-wider uppercase text-white hover:border-tf-cyan transition duration-300 flex items-center space-x-2 shadow-lg">
+                <span class="w-2 h-2 rounded-full bg-tf-cyan animate-pulse"></span>
+                <span id="header-user-name" class="font-bold">MOHAMMAD</span>
+            </button>
+
+            <!-- Sign Out Button (Visible on Profile View) -->
+            <button id="sign-out-btn" onclick="switchView('main-site-view')" class="hidden glass-sidebar px-4 py-2.5 rounded-xl border border-white/20 text-xs font-mono tracking-wider uppercase text-slate-300 hover:text-white hover:border-red-400 transition duration-300 items-center space-x-2 shadow-lg">
+                <i class="fas fa-sign-out-alt text-xs"></i>
+                <span class="font-bold">SIGN OUT</span>
+            </button>
+        </div>
+
+    </header>
+
+    <!-- FIXED LEFT FLOATING VERTICAL DOCK -->
+    <aside class="fixed left-4 sm:left-6 top-1/2 -translate-y-1/2 z-50 hidden sm:flex flex-col items-center glass-sidebar py-5 px-3 rounded-2xl space-y-6">
+        <button onclick="switchView('main-site-view')" id="dock-home" class="dock-btn active-dock flex flex-col items-center text-slate-400 hover:text-white group transition" title="Home">
+            <i class="fas fa-home text-base group-hover:text-tf-cyan transition group-hover:scale-110"></i>
+            <span class="text-[9px] font-mono tracking-wider mt-1 group-hover:text-white">Home</span>
+        </button>
+
+        <button onclick="switchView('events-page-view')" id="dock-events" class="dock-btn flex flex-col items-center text-slate-400 hover:text-white group transition" title="Events & Timeline">
+            <i class="fas fa-calendar-alt text-base group-hover:text-tf-cyan transition group-hover:scale-110"></i>
+            <span class="text-[9px] font-mono tracking-wider mt-1 group-hover:text-white">Events</span>
+        </button>
+
+        <button onclick="switchView('ces-page-view')" id="dock-ces" class="dock-btn flex flex-col items-center text-slate-400 hover:text-white group transition" title="CES (Tech Expo)">
+            <i class="fas fa-microchip text-base group-hover:text-tf-cyan transition group-hover:scale-110"></i>
+            <span class="text-[9px] font-mono tracking-wider mt-1 font-bold group-hover:text-white">CES</span>
+        </button>
+
+        <button onclick="switchView('contact-page-view')" id="dock-contact" class="dock-btn flex flex-col items-center text-slate-400 hover:text-white group transition" title="Contact Us">
+            <i class="fas fa-phone-alt text-base group-hover:text-tf-cyan transition group-hover:scale-110"></i>
+            <span class="text-[9px] font-mono tracking-wider mt-1 group-hover:text-white">Contact Us</span>
+        </button>
+
+        <button onclick="switchView('about-page-view')" id="dock-about" class="dock-btn flex flex-col items-center text-slate-400 hover:text-white group transition" title="About Us">
+            <i class="fas fa-users text-base group-hover:text-tf-cyan transition group-hover:scale-110"></i>
+            <span class="text-[9px] font-mono tracking-wider mt-1 group-hover:text-white">About Us</span>
+        </button>
+    </aside>
+
+    <!-- FIXED RIGHT FLOATING SOCIALS DOCK -->
+    <aside class="fixed right-4 sm:right-6 top-1/2 -translate-y-1/2 z-50 hidden sm:flex flex-col items-center glass-sidebar py-5 px-3 rounded-2xl space-y-5">
+        <a href="https://www.instagram.com/devirfan/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white hover:scale-125 transition duration-200" title="Instagram (@devirfan)">
+            <i class="fab fa-instagram text-base"></i>
+        </a>
+        <a href="https://x.com/mohammadir92726" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white hover:scale-125 transition duration-200" title="X (Twitter)">
+            <i class="fab fa-x-twitter text-base"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/mr-irfan1/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white hover:scale-125 transition duration-200" title="LinkedIn (mr-irfan1)">
+            <i class="fab fa-linkedin-in text-base"></i>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61584857323010" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white hover:scale-125 transition duration-200" title="Facebook">
+            <i class="fab fa-facebook-f text-base"></i>
+        </a>
+        <a href="https://discord.com/users/1421052504983998525" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white hover:scale-125 transition duration-200" title="Discord (devirfan)">
+            <i class="fab fa-discord text-base"></i>
+        </a>
+    </aside>
+
+    <!-- Floating Quick Hub Menu Popover -->
+    <div id="quick-hub-popover" class="fixed right-6 bottom-20 z-50 hidden flex-col w-60 rounded-2xl glass-sidebar border border-cyan-400/40 p-3 shadow-2xl space-y-1.5 backdrop-blur-xl animate-fadeIn">
+        <div class="px-3 py-1.5 border-b border-white/10 flex items-center justify-between">
+            <span class="font-cinzel font-bold text-xs text-white">CITADEL QUICK HUB</span>
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+        </div>
+        <button onclick="switchView('main-site-view'); toggleQuickMenu();" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-mono text-slate-300 hover:text-white hover:bg-cyan-500/20 transition">
+            <i class="fas fa-home text-cyan-400 w-4"></i>
+            <span>Citadel Home</span>
+        </button>
+        <button onclick="switchView('events-page-view'); toggleQuickMenu();" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-mono text-slate-300 hover:text-white hover:bg-cyan-500/20 transition">
+            <i class="fas fa-calendar-alt text-cyan-400 w-4"></i>
+            <span>Events & Schedule</span>
+        </button>
+        <button onclick="switchView('ces-page-view'); toggleQuickMenu();" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-mono text-slate-300 hover:text-white hover:bg-cyan-500/20 transition">
+            <i class="fas fa-microchip text-cyan-400 w-4"></i>
+            <span>CES Quantum Expo</span>
+        </button>
+        <button onclick="switchView('accommodation-page-view'); toggleQuickMenu();" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-mono text-slate-300 hover:text-white hover:bg-amber-500/20 transition">
+            <i class="fas fa-hotel text-amber-400 w-4"></i>
+            <span>Accommodation</span>
+        </button>
+        <button onclick="switchView('workshops-page-view'); toggleQuickMenu();" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-mono text-slate-300 hover:text-white hover:bg-cyan-500/20 transition">
+            <i class="fas fa-laptop-code text-cyan-400 w-4"></i>
+            <span>Workshops Lab</span>
+        </button>
+        <button onclick="switchView('competitions-page-view'); toggleQuickMenu();" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-mono text-slate-300 hover:text-white hover:bg-red-500/20 transition">
+            <i class="fas fa-trophy text-red-400 w-4"></i>
+            <span>Competitions Arena</span>
+        </button>
+        <button onclick="switchView('ignite-page-view'); toggleQuickMenu();" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-mono text-slate-300 hover:text-white hover:bg-purple-500/20 transition">
+            <i class="fas fa-fire-flame-curved text-purple-400 w-4"></i>
+            <span>Ignite Summit</span>
+        </button>
+        <button onclick="switchView('contact-page-view'); toggleQuickMenu();" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-mono text-slate-300 hover:text-white hover:bg-purple-400/20 transition">
+            <i class="fas fa-phone-alt text-purple-400 w-4"></i>
+            <span>Contact Secretariat</span>
+        </button>
+        <button onclick="switchView('about-page-view'); toggleQuickMenu();" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-mono text-slate-300 hover:text-white hover:bg-amber-400/20 transition">
+            <i class="fas fa-users text-amber-400 w-4"></i>
+            <span>About 30th Legacy</span>
+        </button>
+        <button onclick="switchView('profile-page-view'); toggleQuickMenu();" class="w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-mono text-slate-300 hover:text-white hover:bg-amber-500/20 transition border-t border-white/10 mt-1 pt-2">
+            <i class="fas fa-user-astronaut text-tf-gold w-4"></i>
+            <span>Mohammad Irfan Profile</span>
+        </button>
+    </div>
+
+    <!-- Bottom Right Floating Coral/Red Launcher Button -->
+    <button onclick="toggleQuickMenu()" class="fixed right-6 bottom-6 z-50 w-12 h-12 rounded-full bg-gradient-to-br from-red-500 to-rose-600 text-white flex items-center justify-center shadow-2xl hover:scale-110 transition duration-300 group border border-white/20" title="Techfest Quick Hub">
+        <span class="font-cinzel font-black text-xl italic group-hover:rotate-45 transition-transform duration-300">T</span>
+    </button>
+
+    <!-- VIEW CONTAINER 1: MAIN SITE VIEW (HERO + 3 GOLDEN CARDS + COMPETITIONS) -->
+    <div id="main-site-view" class="w-full">
+        
+        <!-- SECTION 1: HERO VIEW -->
+        <section id="hero-section" class="relative w-full h-screen min-h-[700px] flex flex-col justify-between overflow-hidden bg-black transition-all duration-700">
+            
+            <!-- Hero Background Video -->
+            <video autoplay loop muted playsinline poster="assets/techfest_hero_bg.jpg" class="absolute inset-0 w-full h-full object-cover pointer-events-none z-0">
+                <source src="assets/techfest_hero_bg.mp4" type="video/mp4">
+            </video>
+
+            <div class="absolute inset-0 bg-gradient-to-t from-[#060911] via-transparent to-black/40 pointer-events-none z-[1]"></div>
+            <div class="absolute inset-0 bg-radial-gradient pointer-events-none z-[2]" style="background: radial-gradient(circle at center, transparent 40%, rgba(6,9,17,0.7) 100%);"></div>
+
+            <!-- Three.js Floating Lava Fire Embers -->
+            <div id="aetherial-canvas"></div>
+
+            <div class="h-24"></div>
+
+            <!-- Hero Center Stage: Renaissance Sword Title -->
+            <div class="relative z-20 w-full flex-1 flex flex-col items-center justify-center px-4 text-center select-none pt-4 pb-12">
+                
+                <div class="font-cinzel text-sm sm:text-base md:text-lg tracking-[0.25em] text-slate-300 uppercase mb-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                    IIT Bombay's
+                </div>
+
+                <div class="relative my-2 sm:my-3">
+                    <div class="flex items-center justify-center">
+                        <svg class="w-[320px] sm:w-[540px] md:w-[720px] lg:w-[860px] h-auto overflow-visible filter drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)]" viewBox="0 0 850 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="548" cy="90" r="35" fill="rgba(0,210,255,0.25)" filter="blur(16px)"/>
+                            <path d="M548 10L552 82L556 168L548 178L540 168L544 82L548 10Z" fill="url(#swordGrad)" stroke="#4de8ff" stroke-width="1.2" class="sword-glow"/>
+                            <path d="M500 88L538 84L548 76L558 84L596 88L558 92L548 100L538 92L500 88Z" fill="url(#swordGrad)" stroke="#4de8ff" stroke-width="1"/>
+                            <polygon points="548,78 554,88 548,98 542,88" fill="#ffffff" stroke="#00d2ff" stroke-width="1.5" class="sword-glow"/>
+                            <circle cx="548" cy="88" r="2.5" fill="#ffffff"/>
+
+                            <text x="35" y="118" font-family="'Cinzel Decorative', serif" font-weight="900" font-size="94" letter-spacing="4" fill="url(#metalGrad)" stroke="#0c2340" stroke-width="2" class="techfest-title-text">
+                                TECHFES
+                            </text>
+                            <text x="522" y="118" font-family="'Cinzel Decorative', serif" font-weight="900" font-size="94" letter-spacing="4" fill="url(#metalGrad)" stroke="#0c2340" stroke-width="2" class="techfest-title-text">
+                                T
+                            </text>
+
+                            <defs>
+                                <linearGradient id="metalGrad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#ffffff"/>
+                                    <stop offset="35%" stop-color="#d6edff"/>
+                                    <stop offset="65%" stop-color="#709fc7"/>
+                                    <stop offset="100%" stop-color="#2a4d70"/>
+                                </linearGradient>
+                                <linearGradient id="swordGrad" x1="0" y1="0" x2="1" y2="1">
+                                    <stop offset="0%" stop-color="#ffffff"/>
+                                    <stop offset="40%" stop-color="#64b5f6"/>
+                                    <stop offset="80%" stop-color="#1e88e5"/>
+                                    <stop offset="100%" stop-color="#0d47a1"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-center space-x-6 sm:space-x-10 font-cinzel text-xs sm:text-sm tracking-[0.25em] text-slate-200 uppercase mt-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                    <span>16<sup>th</sup> - 18<sup>th</sup> DECEMBER</span>
+                    <span class="text-tf-cyan font-bold">•</span>
+                    <span>30<sup>th</sup> EDITION</span>
+                </div>
+
+                <div class="font-cinzel text-sm sm:text-base md:text-lg text-slate-300 tracking-wider mt-2 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+                    Asia's Largest Science & Technology Festival
+                </div>
+
+                <div class="flex items-center justify-center space-x-3 sm:space-x-4 mt-3">
+                    <svg class="w-12 sm:w-24 h-4 text-tf-cyan/70" viewBox="0 0 100 20" fill="none">
+                        <path d="M0 10H80M80 10L70 4M80 10L70 16M90 10H100" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="85" cy="10" r="2.5" fill="currentColor"/>
+                    </svg>
+
+                    <span class="font-cinzel font-bold text-xs sm:text-sm md:text-base tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-tf-gold via-white to-tf-cyan uppercase drop-shadow-[0_0_10px_rgba(255,210,105,0.4)]">
+                        AN AETHERIAL RENAISSANCE
+                    </span>
+
+                    <svg class="w-12 sm:w-24 h-4 text-tf-cyan/70 rotate-180" viewBox="0 0 100 20" fill="none">
+                        <path d="M0 10H80M80 10L70 4M80 10L70 16M90 10H100" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="85" cy="10" r="2.5" fill="currentColor"/>
+                    </svg>
+                </div>
+
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="relative z-20 pb-6 flex flex-col items-center justify-center text-center">
+                <button onclick="scrollToPortal()" class="group flex flex-col items-center focus:outline-none">
+                    <span class="font-mono text-[10px] sm:text-xs tracking-[0.3em] text-slate-300 uppercase group-hover:text-tf-cyan transition">
+                        SCROLL
+                    </span>
+                    <div class="w-[1.5px] h-8 bg-gradient-to-b from-white via-tf-cyan to-transparent mt-2 scroll-indicator-line"></div>
+                </button>
+            </div>
+
+        </section>
+
+        <!-- SECTION 2: THE 3 FLOATING GOLDEN MECHANICAL CARDS -->
+        <section id="section-portal" class="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-cover bg-center py-20 px-4 sm:px-12" style="background-image: url('assets/techfest_portal_bg.jpg');">
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-[#060911] via-black/25 to-black/50 pointer-events-none z-[1]"></div>
+            <div class="absolute inset-0 bg-radial-gradient pointer-events-none z-[2]" style="background: radial-gradient(circle at center, transparent 40%, rgba(6,9,17,0.7) 100%);"></div>
+
+            <div class="relative z-20 max-w-6xl w-full mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-center pt-10 pb-8">
+                
+                <!-- CARD 1: CA PROGRAM -->
+                <div class="golden-tech-frame p-6 sm:p-8 rounded-2xl flex flex-col justify-between h-[420px] sm:h-[460px] text-center group">
+                    <div class="rivet-corner top-3 left-3"></div>
+                    <div class="rivet-corner top-3 right-3"></div>
+                    <div class="rivet-corner bottom-3 left-3"></div>
+                    <div class="rivet-corner bottom-3 right-3"></div>
+
+                    <div class="pt-2">
+                        <h3 class="font-cinzel font-bold text-2xl sm:text-3xl text-tf-gold tracking-wide mb-4 drop-shadow-[0_2px_10px_rgba(255,210,105,0.4)]">
+                            CA Program
+                        </h3>
+                        <p class="text-slate-300 text-xs sm:text-sm font-grotesk leading-relaxed px-2">
+                            Become a College Ambassador for Techfest. Represent us at your college. Get exclusive perks and certificates.
+                        </p>
+                    </div>
+
+                    <div class="pb-3">
+                        <button onclick="openModal('ca-modal')" class="px-8 py-2.5 rounded-full bg-gradient-to-r from-tf-gold via-yellow-400 to-amber-500 text-black font-grotesk font-bold text-xs uppercase tracking-wider shadow-lg hover:scale-105 hover:shadow-yellow-500/50 transition duration-300">
+                            Join now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 2: ABOUT TECHFEST -->
+                <div class="golden-tech-frame p-6 sm:p-8 rounded-2xl flex flex-col justify-between h-[450px] sm:h-[490px] text-center group border-amber-300">
+                    <div class="rivet-corner top-3 left-3 bg-amber-200"></div>
+                    <div class="rivet-corner top-3 right-3 bg-amber-200"></div>
+                    <div class="rivet-corner bottom-3 left-3 bg-amber-200"></div>
+                    <div class="rivet-corner bottom-3 right-3 bg-amber-200"></div>
+
+                    <div class="pt-2">
+                        <h3 class="font-cinzel font-bold text-2xl sm:text-3xl text-tf-gold tracking-wide mb-3 drop-shadow-[0_2px_10px_rgba(255,210,105,0.4)]">
+                            About Techfest
+                        </h3>
+                        <p class="text-slate-300 text-xs sm:text-sm font-grotesk leading-relaxed px-1">
+                            Welcome to the Official Website of 30th Edition of Techfest, Asia's Largest Science and Technology festival
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 sm:gap-4 my-2">
+                        <div onclick="switchView('workshops-page-view')" class="rounded-xl overflow-hidden border border-amber-400/50 bg-black/50 hover:border-tf-cyan transition duration-300 cursor-pointer group/inner shadow-md">
+                            <div class="h-24 sm:h-28 w-full bg-cover bg-center group-hover/inner:scale-105 transition duration-500" style="background-image: url('assets/workshops_thumb.jpg');"></div>
+                            <div class="py-1.5 bg-black/80 font-cinzel font-bold text-[11px] sm:text-xs text-tf-gold border-t border-amber-400/30">
+                                Workshops
+                            </div>
+                        </div>
+
+                        <div onclick="switchView('competitions-page-view')" class="rounded-xl overflow-hidden border border-amber-400/50 bg-black/50 hover:border-tf-cyan transition duration-300 cursor-pointer group/inner shadow-md">
+                            <div class="h-24 sm:h-28 w-full bg-cover bg-center group-hover/inner:scale-105 transition duration-500" style="background-image: url('assets/hackathon_thumb.jpg');"></div>
+                            <div class="py-1.5 bg-black/80 font-cinzel font-bold text-[11px] sm:text-xs text-tf-gold border-t border-amber-400/30">
+                                Competitions
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-[11px] font-mono text-slate-400 pb-1">
+                        DECEMBER 16 - 18, 2026 // IIT BOMBAY
+                    </div>
+                </div>
+
+                <!-- CARD 3: MORE EVENTS -->
+                <div class="golden-tech-frame p-6 sm:p-8 rounded-2xl flex flex-col justify-between h-[420px] sm:h-[460px] text-center group">
+                    <div class="rivet-corner top-3 left-3"></div>
+                    <div class="rivet-corner top-3 right-3"></div>
+                    <div class="rivet-corner bottom-3 left-3"></div>
+                    <div class="rivet-corner bottom-3 right-3"></div>
+
+                    <div class="pt-2">
+                        <h3 class="font-cinzel font-bold text-2xl sm:text-3xl text-tf-gold tracking-wide mb-4 drop-shadow-[0_2px_10px_rgba(255,210,105,0.4)]">
+                            More Events
+                        </h3>
+                        <p class="text-slate-300 text-xs sm:text-sm font-grotesk leading-relaxed px-2">
+                            Discover more events and highlights. Stay tuned for updates. More details coming soon.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3 pb-3">
+                        <button onclick="switchView('events-page-view')" class="w-full py-2.5 rounded-xl bg-white/10 border border-white/20 text-white font-grotesk font-semibold text-xs hover:border-tf-gold hover:text-tf-gold transition">
+                            View Festival Schedule
+                        </button>
+                        <button onclick="switchView('ces-page-view')" class="w-full py-2.5 rounded-xl bg-amber-400/10 border border-amber-400/40 text-tf-gold font-grotesk font-semibold text-xs hover:bg-amber-400 hover:text-black transition">
+                            Explore Tech Expo & CES
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- SECTION 3: COMPETITIONS ARENA -->
+        <section id="section-competitions" class="py-24 px-4 sm:px-8 max-w-7xl mx-auto relative z-20">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="font-mono text-xs text-tf-cyan tracking-widest uppercase">TECHFEST 30TH EDITION</span>
+                <h2 class="font-cinzel font-bold text-3xl sm:text-5xl text-white">
+                    FLAGSHIP <span class="text-tf-cyan">COMPETITIONS</span>
+                </h2>
+                <p class="text-slate-400 text-sm font-grotesk">
+                    Total Prize Pool of ₹45,00,000+. Battle the best teams from IITs, NITs, and top global technical universities.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Robowars Card -->
+                <div class="glass-sidebar p-6 rounded-2xl border border-tf-gold/30 hover:border-tf-cyan transition duration-300 group flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2.5 py-0.5 rounded bg-black/60 text-tf-gold font-mono text-[10px] border border-tf-gold/40">INTERNATIONAL ROBOWARS</span>
+                            <span class="text-xs font-mono text-slate-400">PRIZE: ₹12,00,000</span>
+                        </div>
+                        <h3 class="font-cinzel font-bold text-xl text-white group-hover:text-tf-cyan transition mb-2">Combat Bot Deathmatch</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed font-grotesk mb-4">
+                            60kg Heavyweight & 15kg Featherweight combat robots clash in a bulletproof Lexan cage with spinning drums and high-pressure pneumatic flippers.
+                        </p>
+                    </div>
+                    <button onclick="openModal('robowars-reg')" class="w-full py-2.5 rounded-xl bg-tf-cyan/20 border border-tf-cyan/50 text-tf-cyan font-mono text-xs font-bold hover:bg-tf-cyan hover:text-black transition">
+                        REGISTER COMBAT TEAM
+                    </button>
+                </div>
+
+                <!-- Meshmerize Maze Card -->
+                <div class="glass-sidebar p-6 rounded-2xl border border-white/10 hover:border-tf-cyan transition duration-300 group flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2.5 py-0.5 rounded bg-black/60 text-tf-cyan font-mono text-[10px] border border-tf-cyan/40">AUTONOMOUS ROBOTICS</span>
+                            <span class="text-xs font-mono text-slate-400">PRIZE: ₹2,50,000</span>
+                        </div>
+                        <h3 class="font-cinzel font-bold text-xl text-white group-hover:text-tf-cyan transition mb-2">Meshmerize Line Maze</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed font-grotesk mb-4">
+                            Build an autonomous robot capable of real-time sensor processing and dynamic grid maze traversal in record-breaking speed.
+                        </p>
+                    </div>
+                    <button onclick="switchView('competitions-page-view')" class="w-full py-2.5 rounded-xl bg-white/10 border border-white/20 text-white font-mono text-xs font-bold hover:bg-tf-cyan hover:text-black transition">
+                        EXPLORE RULES & REGS
+                    </button>
+                </div>
+
+                <!-- Boeing Aeromodelling -->
+                <div class="glass-sidebar p-6 rounded-2xl border border-white/10 hover:border-tf-cyan transition duration-300 group flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2.5 py-0.5 rounded bg-black/60 text-tf-gold font-mono text-[10px] border border-tf-gold/40">BOEING AEROSPACE</span>
+                            <span class="text-xs font-mono text-slate-400">PRIZE: ₹3,50,000</span>
+                        </div>
+                        <h3 class="font-cinzel font-bold text-xl text-white group-hover:text-tf-cyan transition mb-2">Boeing Aeromodelling</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed font-grotesk mb-4">
+                            Design and pilot an electric RC fixed-wing airplane engineered for aerodynamic payload carriage and pinpoint target drops.
+                        </p>
+                    </div>
+                    <button onclick="switchView('competitions-page-view')" class="w-full py-2.5 rounded-xl bg-white/10 border border-white/20 text-white font-mono text-xs font-bold hover:bg-tf-cyan hover:text-black transition">
+                        EXPLORE RULES & REGS
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="border-t border-white/10 bg-black/90 py-12 px-4 sm:px-8 text-xs font-mono text-slate-400">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center space-x-3">
+                    <img src="assets/techfest_logo.png" alt="TF" class="h-6 w-auto object-contain filter drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">
+                    <span class="font-cinzel font-bold text-white text-base">TECHFEST 2026</span>
+                    <span>•</span>
+                    <span>IIT BOMBAY</span>
+                    <span>•</span>
+                    <span class="text-tf-cyan">AN AETHERIAL RENAISSANCE</span>
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-6 text-slate-300 font-mono text-xs">
+                    <button onclick="switchView('main-site-view')" class="hover:text-tf-cyan transition">HOME</button>
+                    <button onclick="switchView('accommodation-page-view')" class="hover:text-tf-cyan transition">ACCOMMODATION</button>
+                    <button onclick="switchView('workshops-page-view')" class="hover:text-tf-cyan transition">WORKSHOPS</button>
+                    <button onclick="switchView('competitions-page-view')" class="hover:text-tf-cyan transition">COMPETITIONS</button>
+                    <button onclick="switchView('ignite-page-view')" class="hover:text-tf-cyan transition">IGNITE</button>
+                    <button onclick="switchView('events-page-view')" class="hover:text-tf-cyan transition">EVENTS</button>
+                    <button onclick="switchView('ces-page-view')" class="hover:text-tf-cyan transition">CES EXPO</button>
+                    <button onclick="switchView('contact-page-view')" class="hover:text-tf-cyan transition">CONTACT US</button>
+                    <button onclick="switchView('about-page-view')" class="hover:text-tf-cyan transition">ABOUT US</button>
+                    <button onclick="switchView('profile-page-view')" class="text-tf-gold hover:text-white transition">MOHAMMAD'S PROFILE</button>
+                </div>
+                <div class="text-slate-500">
+                    16th - 18th December • 30th Edition • Powai, Mumbai - 400076
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- VIEW CONTAINER 2: OFFICIAL PROFILE VIEW -->
+    <div id="profile-page-view" class="view-container hidden min-h-screen w-full relative bg-cover bg-center overflow-x-hidden pt-24 pb-16 px-4 sm:px-12 flex flex-col items-center justify-center" style="background-image: url('assets/profile_fire_ring_bg.jpg');">
+        
+        <div class="absolute inset-0 bg-black/55 pointer-events-none z-[1]"></div>
+        <div class="absolute inset-0 bg-radial-gradient pointer-events-none z-[2]" style="background: radial-gradient(circle at center, transparent 35%, rgba(10,2,2,0.85) 100%);"></div>
+
+        <div class="relative z-20 max-w-6xl w-full mx-auto space-y-6">
+            
+            <!-- Breadcrumb Navigation Bar -->
+            <div class="flex items-center justify-between w-full pb-2 border-b border-amber-500/25">
+                <button onclick="switchView('main-site-view')" class="flex items-center space-x-2 text-xs font-mono text-slate-300 hover:text-white transition px-3.5 py-1.5 rounded-xl bg-black/50 border border-amber-400/30 hover:border-amber-400 shadow-lg">
+                    <i class="fas fa-arrow-left text-tf-gold"></i>
+                    <span>RETURN TO CITADEL</span>
+                </button>
+                <div class="hidden sm:flex items-center space-x-2 font-mono text-[11px] text-slate-400">
+                    <span class="cursor-pointer hover:text-white transition" onclick="switchView('main-site-view')">HOME</span>
+                    <span>/</span>
+                    <span class="text-amber-400 font-bold">MOHAMMAD'S PROFILE</span>
+                </div>
+            </div>
+
+            <div class="text-center pt-1 pb-2">
+                <h1 class="profile-title-text font-cinzelDeco font-black text-4xl sm:text-6xl tracking-[0.2em] uppercase select-none">
+                    PROFILE
+                </h1>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left Column: Personal Identity & Details -->
+                <div class="lg:col-span-7 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="font-mono text-xs text-slate-400 tracking-wider block mb-1">
+                                Fire link established
+                            </span>
+                            <div class="flex items-center space-x-3">
+                                <h2 class="font-grotesk font-bold text-2xl sm:text-3xl text-white tracking-wide">
+                                    Mohammad Irfan
+                                </h2>
+                                <span class="text-rose-500 font-mono text-xs font-bold uppercase tracking-widest pt-1">
+                                    ready
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-900/60 to-black/80 border border-red-500/50 flex items-center justify-center p-2 shadow-lg shadow-red-950/60" style="clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);">
+                            <i class="fas fa-fire-flame-curved text-2xl text-red-500 filter drop-shadow-[0_0_8px_#ef4444]"></i>
+                        </div>
+                    </div>
+
+                    <div class="profile-fire-card rounded-2xl overflow-hidden">
+                        <div class="pt-3 px-6">
+                            <span class="red-tab-badge">PERSONAL DETAILS</span>
+                        </div>
+                        <div class="p-6 space-y-3 font-mono text-xs sm:text-sm">
+                            <div class="flex items-center">
+                                <span class="text-rose-500/80 w-24 sm:w-28 font-bold">NAME:</span>
+                                <span class="text-white font-grotesk font-semibold">Mohammad Irfan</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-rose-500/80 w-24 sm:w-28 font-bold">TF-ID:</span>
+                                <span class="text-white font-mono tracking-wider">TF-11979</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-rose-500/80 w-24 sm:w-28 font-bold">EMAIL:</span>
+                                <span class="text-white font-mono tracking-tight break-all">mohammadirfan9403@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Spirit Animal Card -->
+                <div class="lg:col-span-5">
+                    <div class="profile-fire-card rounded-2xl overflow-hidden border-red-500/40">
+                        <div class="bg-gradient-to-r from-red-600 to-rose-700 px-5 py-2.5 flex items-center justify-between">
+                            <span class="font-grotesk font-bold text-sm text-white tracking-wide">Spirit Animal</span>
+                            <i class="fas fa-paw text-white/80 text-xs"></i>
+                        </div>
+
+                        <div class="relative w-full h-64 sm:h-72 overflow-hidden bg-black/60">
+                            <img id="spirit-animal-img" src="assets/spirit_animal_fire.jpg" alt="Spirit Animal Fire Kitsune" class="w-full h-full object-cover object-center filter saturate-110 contrast-105">
+                        </div>
+
+                        <div class="bg-black/90 p-3 border-t border-red-500/30 flex items-center justify-between">
+                            <div class="relative w-full">
+                                <select id="element-select" onchange="changeSpiritElement(this.value)" class="w-full bg-transparent text-white font-mono text-xs font-bold tracking-wider uppercase focus:outline-none appearance-none cursor-pointer pr-6">
+                                    <option value="fire" class="bg-neutral-900 text-white">CHOOSE YOUR ELEMENT (FIRE)</option>
+                                    <option value="water" class="bg-neutral-900 text-white">WATER ELEMENT (LEVIATHAN)</option>
+                                    <option value="lightning" class="bg-neutral-900 text-white">LIGHTNING ELEMENT (THUNDER FALCON)</option>
+                                    <option value="earth" class="bg-neutral-900 text-white">EARTH ELEMENT (OBSIDIAN GOLEM)</option>
+                                </select>
+                                <i class="fas fa-caret-down text-white text-xs absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Lower Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                <div class="profile-fire-card rounded-2xl overflow-hidden min-h-[170px] flex flex-col justify-between">
+                    <div>
+                        <div class="pt-3 px-5">
+                            <span class="red-tab-badge">COMPETITIONS</span>
+                        </div>
+                        <div id="user-competitions-list" class="p-6 text-center text-slate-400 font-mono text-xs">
+                            No competition registrations yet.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-fire-card rounded-2xl overflow-hidden min-h-[170px] flex flex-col justify-between">
+                    <div>
+                        <div class="pt-3 px-5">
+                            <span class="red-tab-badge">WORKSHOPS</span>
+                        </div>
+                        <div id="user-workshops-list" class="p-6 text-center text-slate-400 font-mono text-xs">
+                            No workshop registrations yet.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- VIEW CONTAINER 3: EVENTS & TIMELINE VIEW -->
+    <div id="events-page-view" class="view-container hidden min-h-screen w-full relative bg-cover bg-center overflow-x-hidden pt-24 pb-16 px-4 sm:px-12 flex flex-col items-center justify-center" style="background-image: url('assets/events_celestial_bg.jpg');">
+        
+        <div class="absolute inset-0 bg-black/60 pointer-events-none z-[1]"></div>
+        <div class="absolute inset-0 bg-radial-gradient pointer-events-none z-[2]" style="background: radial-gradient(circle at center, transparent 35%, rgba(4,10,25,0.88) 100%);"></div>
+
+        <div class="relative z-20 max-w-6xl w-full mx-auto space-y-6">
+            
+            <!-- Breadcrumb Navigation Bar -->
+            <div class="flex items-center justify-between w-full pb-2 border-b border-cyan-500/25">
+                <button onclick="switchView('main-site-view')" class="flex items-center space-x-2 text-xs font-mono text-slate-300 hover:text-white transition px-3.5 py-1.5 rounded-xl bg-black/50 border border-cyan-400/30 hover:border-cyan-400 shadow-lg">
+                    <i class="fas fa-arrow-left text-tf-cyan"></i>
+                    <span>RETURN TO CITADEL</span>
+                </button>
+                <div class="hidden sm:flex items-center space-x-2 font-mono text-[11px] text-slate-400">
+                    <span class="cursor-pointer hover:text-white transition" onclick="switchView('main-site-view')">HOME</span>
+                    <span>/</span>
+                    <span class="text-cyan-400 font-bold">EVENTS & CALENDAR</span>
+                </div>
+            </div>
+
+            <div class="text-center pt-1 pb-2">
+                <h1 class="events-title-text font-cinzelDeco font-black text-4xl sm:text-6xl tracking-[0.2em] uppercase select-none">
+                    EVENTS
+                </h1>
+            </div>
+
+            <!-- Header Status Bar -->
+            <div class="flex flex-col sm:flex-row items-center justify-between border-b border-cyan-500/25 pb-4 gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-950/60 border border-cyan-400/50 flex items-center justify-center text-cyan-400 text-xl shadow-lg shadow-cyan-950/60">
+                        <i class="fas fa-clock-rotate-left"></i>
+                    </div>
+                    <div>
+                        <span class="font-mono text-xs text-cyan-400 block tracking-widest">TEMPORAL COORDINATE: LOCKED</span>
+                        <h3 class="font-grotesk font-bold text-xl text-white">Festival Master Calendar (Dec 16 - 18)</h3>
+                    </div>
+                </div>
+
+                <!-- Day Selector Tabs -->
+                <div class="flex items-center space-x-2 font-mono text-xs">
+                    <button onclick="switchEventsDay(1, this)" class="ev-day-btn active px-4 py-2 rounded-xl bg-cyan-500 text-black font-bold border border-cyan-400 shadow-md">
+                        DAY 01 (DEC 16)
+                    </button>
+                    <button onclick="switchEventsDay(2, this)" class="ev-day-btn px-4 py-2 rounded-xl bg-black/60 text-slate-300 hover:text-white border border-white/20">
+                        DAY 02 (DEC 17)
+                    </button>
+                    <button onclick="switchEventsDay(3, this)" class="ev-day-btn px-4 py-2 rounded-xl bg-black/60 text-slate-300 hover:text-white border border-white/20">
+                        DAY 03 (DEC 18)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Day Events List -->
+            <div id="events-day-container" class="space-y-4">
+                <!-- Injected via JS -->
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- VIEW CONTAINER 4: CES & TECH EXPO VIEW -->
+    <div id="ces-page-view" class="view-container hidden min-h-screen w-full relative bg-cover bg-center overflow-x-hidden pt-24 pb-16 px-4 sm:px-12 flex flex-col items-center justify-center" style="background-image: url('assets/ces_quantum_bg.jpg');">
+        
+        <div class="absolute inset-0 bg-black/55 pointer-events-none z-[1]"></div>
+        <div class="absolute inset-0 bg-radial-gradient pointer-events-none z-[2]" style="background: radial-gradient(circle at center, transparent 35%, rgba(3,15,25,0.85) 100%);"></div>
+
+        <div class="relative z-20 max-w-6xl w-full mx-auto space-y-6">
+            
+            <!-- Breadcrumb Navigation Bar -->
+            <div class="flex items-center justify-between w-full pb-2 border-b border-cyan-500/25">
+                <button onclick="switchView('main-site-view')" class="flex items-center space-x-2 text-xs font-mono text-slate-300 hover:text-white transition px-3.5 py-1.5 rounded-xl bg-black/50 border border-cyan-400/30 hover:border-cyan-400 shadow-lg">
+                    <i class="fas fa-arrow-left text-tf-cyan"></i>
+                    <span>RETURN TO CITADEL</span>
+                </button>
+                <div class="hidden sm:flex items-center space-x-2 font-mono text-[11px] text-slate-400">
+                    <span class="cursor-pointer hover:text-white transition" onclick="switchView('main-site-view')">HOME</span>
+                    <span>/</span>
+                    <span class="text-cyan-400 font-bold">CES EXPO</span>
+                </div>
+            </div>
+
+            <div class="text-center pt-1 pb-2">
+                <h1 class="ces-title-text font-cinzelDeco font-black text-4xl sm:text-6xl tracking-[0.2em] uppercase select-none">
+                    CES EXPO
+                </h1>
+            </div>
+
+            <div class="flex items-center justify-between border-b border-cyan-500/30 pb-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-950/70 border border-cyan-400/50 flex items-center justify-center text-cyan-300 text-xl">
+                        <i class="fas fa-microchip animate-pulse"></i>
+                    </div>
+                    <div>
+                        <span class="font-mono text-xs text-cyan-300 block tracking-widest">QUANTUM LINK ESTABLISHED</span>
+                        <h3 class="font-grotesk font-bold text-xl text-white">International Technological Demonstrations</h3>
+                    </div>
+                </div>
+                <span class="hidden sm:inline font-mono text-xs px-3 py-1 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-400/30">
+                    6 GLOBAL BREAKTHROUGHS
+                </span>
+            </div>
+
+            <!-- CES 6 Prototype Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Exhibit 1 -->
+                <div class="view-themed-card p-6 rounded-2xl border border-cyan-400/30 flex flex-col justify-between group hover:border-cyan-400 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="cyan-tab-badge">SWEDEN</span>
+                            <span class="font-mono text-[10px] text-slate-400">HALL A // BOOTH 01</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-cyan-300 transition mb-2">Furhat Social Humanoid AI</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            3D acrylic mask rear-projection with situational facial micro-expressions and contextual voice dialogue.
+                        </p>
+                    </div>
+                    <button onclick="openModal('ces')" class="w-full py-2 bg-cyan-500/20 hover:bg-cyan-500 hover:text-black border border-cyan-400/40 rounded-xl text-xs font-mono font-bold transition">
+                        VIEW HARDWARE SPECS
+                    </button>
+                </div>
+
+                <!-- Exhibit 2 -->
+                <div class="view-themed-card p-6 rounded-2xl border border-amber-400/30 flex flex-col justify-between group hover:border-amber-400 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="gold-tab-badge">CHINA</span>
+                            <span class="font-mono text-[10px] text-slate-400">OPEN ARENA 02</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-amber-300 transition mb-2">Unitree B2 Cyber-Dog</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Industrial quadruped robot with 6 m/s sprint velocity, 50kg payload capability, and 3D LiDAR terrain navigation.
+                        </p>
+                    </div>
+                    <button onclick="openModal('ces')" class="w-full py-2 bg-amber-400/20 hover:bg-amber-400 hover:text-black border border-amber-400/40 rounded-xl text-xs font-mono font-bold transition">
+                        VIEW HARDWARE SPECS
+                    </button>
+                </div>
+
+                <!-- Exhibit 3 -->
+                <div class="view-themed-card p-6 rounded-2xl border border-red-500/30 flex flex-col justify-between group hover:border-red-500 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="red-tab-badge">IIT BOMBAY</span>
+                            <span class="font-mono text-[10px] text-slate-400">PIT LANE // SAC</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-red-400 transition mb-2">E-09 Formula Racecar</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Carbon-fiber electric racecar accelerating from 0 to 100 km/h in 2.1 seconds with custom 4-wheel torque vectoring.
+                        </p>
+                    </div>
+                    <button onclick="openModal('ces')" class="w-full py-2 bg-red-500/20 hover:bg-red-500 hover:text-white border border-red-500/40 rounded-xl text-xs font-mono font-bold transition">
+                        VIEW HARDWARE SPECS
+                    </button>
+                </div>
+
+                <!-- Exhibit 4 -->
+                <div class="view-themed-card p-6 rounded-2xl border border-cyan-400/30 flex flex-col justify-between group hover:border-cyan-400 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="cyan-tab-badge">ISRO</span>
+                            <span class="font-mono text-[10px] text-slate-400">CONVOCATION FOYER</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-cyan-300 transition mb-2">Chandrayaan Rover & Gaganyaan</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Full-scale rover payload and upcoming human spaceflight orbital module with crew life support.
+                        </p>
+                    </div>
+                    <button onclick="openModal('ces')" class="w-full py-2 bg-cyan-500/20 hover:bg-cyan-500 hover:text-black border border-cyan-400/40 rounded-xl text-xs font-mono font-bold transition">
+                        VIEW HARDWARE SPECS
+                    </button>
+                </div>
+
+                <!-- Exhibit 5 -->
+                <div class="view-themed-card p-6 rounded-2xl border border-purple-400/30 flex flex-col justify-between group hover:border-purple-400 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="purple-tab-badge">JAPAN</span>
+                            <span class="font-mono text-[10px] text-slate-400">HALL B // BOOTH 05</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-purple-300 transition mb-2">Volumetric 3D Lightfield</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Glasses-free floating 4K volumetric holographic display with ultrasound haptic mid-air feedback.
+                        </p>
+                    </div>
+                    <button onclick="openModal('ces')" class="w-full py-2 bg-purple-500/20 hover:bg-purple-500 hover:text-white border border-purple-400/40 rounded-xl text-xs font-mono font-bold transition">
+                        VIEW HARDWARE SPECS
+                    </button>
+                </div>
+
+                <!-- Exhibit 6 -->
+                <div class="view-themed-card p-6 rounded-2xl border border-amber-400/30 flex flex-col justify-between group hover:border-amber-400 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="gold-tab-badge">USA</span>
+                            <span class="font-mono text-[10px] text-slate-400">MAIN STAGE GYMKHANA</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-amber-300 transition mb-2">Guardian XO Exoskeleton</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Industrial full-body powered suit amplifying human strength by 20x to lift 90kg with zero physical strain.
+                        </p>
+                    </div>
+                    <button onclick="openModal('ces')" class="w-full py-2 bg-amber-400/20 hover:bg-amber-400 hover:text-black border border-amber-400/40 rounded-xl text-xs font-mono font-bold transition">
+                        VIEW HARDWARE SPECS
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- VIEW CONTAINER 5: CONTACT US & TRANSMISSION VIEW -->
+    <div id="contact-page-view" class="view-container hidden min-h-screen w-full relative bg-cover bg-center overflow-x-hidden pt-24 pb-16 px-4 sm:px-12 flex flex-col items-center justify-center" style="background-image: url('assets/contact_cyber_bg.jpg');">
+        
+        <div class="absolute inset-0 bg-black/60 pointer-events-none z-[1]"></div>
+        <div class="absolute inset-0 bg-radial-gradient pointer-events-none z-[2]" style="background: radial-gradient(circle at center, transparent 35%, rgba(12,4,25,0.88) 100%);"></div>
+
+        <div class="relative z-20 max-w-6xl w-full mx-auto space-y-6">
+            
+            <!-- Breadcrumb Navigation Bar -->
+            <div class="flex items-center justify-between w-full pb-2 border-b border-purple-500/25">
+                <button onclick="switchView('main-site-view')" class="flex items-center space-x-2 text-xs font-mono text-slate-300 hover:text-white transition px-3.5 py-1.5 rounded-xl bg-black/50 border border-purple-400/30 hover:border-purple-400 shadow-lg">
+                    <i class="fas fa-arrow-left text-purple-400"></i>
+                    <span>RETURN TO CITADEL</span>
+                </button>
+                <div class="hidden sm:flex items-center space-x-2 font-mono text-[11px] text-slate-400">
+                    <span class="cursor-pointer hover:text-white transition" onclick="switchView('main-site-view')">HOME</span>
+                    <span>/</span>
+                    <span class="text-purple-400 font-bold">CONTACT US</span>
+                </div>
+            </div>
+
+            <div class="text-center pt-1 pb-2">
+                <h1 class="contact-title-text font-cinzelDeco font-black text-4xl sm:text-6xl tracking-[0.2em] uppercase select-none">
+                    CONTACT US
+                </h1>
+            </div>
+
+            <!-- Main Contact Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left Details Box -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="view-themed-card p-6 rounded-2xl border border-purple-500/40 space-y-4">
+                        <span class="purple-tab-badge">HEADQUARTERS</span>
+                        
+                        <div>
+                            <h3 class="font-cinzel font-bold text-xl text-white mb-2">Techfest Secretariat</h3>
+                            <p class="text-slate-300 text-xs font-mono leading-relaxed">
+                                Students Activity Centre (SAC),<br>
+                                Indian Institute of Technology Bombay,<br>
+                                Powai, Mumbai - 400076, Maharashtra, India.
+                            </p>
+                        </div>
+
+                        <div class="pt-3 border-t border-white/10 space-y-2.5 font-mono text-xs">
+                            <div class="flex items-center gap-2 text-slate-300">
+                                <i class="fas fa-envelope text-purple-400"></i>
+                                <span>General: info@techfest.org</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-slate-300">
+                                <i class="fas fa-robot text-purple-400"></i>
+                                <span>Competitions: competitions@techfest.org</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-slate-300">
+                                <i class="fas fa-hotel text-purple-400"></i>
+                                <span>Hospitality: accommodation@techfest.org</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-slate-300">
+                                <i class="fas fa-phone text-purple-400"></i>
+                                <span>Helpline: +91 22 2576 4056</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-3">
+                            <button onclick="copySecretariatAddress()" class="w-full py-2.5 rounded-xl bg-purple-600/30 hover:bg-purple-600 border border-purple-400/50 text-white font-mono text-xs font-bold transition flex items-center justify-center gap-2">
+                                <i class="fas fa-copy"></i>
+                                <span>COPY CAMPUS ADDRESS</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Transmission Form -->
+                <div class="lg:col-span-7">
+                    <div class="view-themed-card p-6 sm:p-8 rounded-2xl border border-purple-500/40">
+                        <span class="purple-tab-badge">DIRECT TRANSMISSION</span>
+                        <h3 class="font-cinzel font-bold text-2xl text-white mt-2 mb-4">Send a Message to Secretariat</h3>
+
+                        <form onsubmit="handleContactTransmission(event)" class="space-y-4 font-mono text-xs">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-slate-300 mb-1">YOUR NAME</label>
+                                    <input type="text" id="contact-name" required value="Mohammad Irfan" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-purple-400">
+                                </div>
+                                <div>
+                                    <label class="block text-slate-300 mb-1">YOUR EMAIL</label>
+                                    <input type="email" id="contact-email" required value="mohammadirfan9403@gmail.com" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-purple-400">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-slate-300 mb-1">DEPARTMENT / QUERY CATEGORY</label>
+                                <select id="contact-dept" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-purple-400">
+                                    <option value="Robowars & Competitions">Robowars & Competitions</option>
+                                    <option value="Workshops & Masterclasses">Workshops & Masterclasses</option>
+                                    <option value="Accommodation & Passes">Accommodation & Passes</option>
+                                    <option value="College Ambassador Program">College Ambassador Program</option>
+                                    <option value="Sponsorship & Press">Sponsorship & Press</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-slate-300 mb-1">MESSAGE / INQUIRY</label>
+                                <textarea id="contact-msg" rows="4" required placeholder="Type your query here..." class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-purple-400 resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-grotesk font-bold text-xs uppercase tracking-wider hover:opacity-95 transition shadow-lg shadow-purple-950/50 flex items-center justify-center gap-2">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>TRANSMIT DISPATCH</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- VIEW CONTAINER 6: ABOUT US & LEGACY VIEW -->
+    <div id="about-page-view" class="view-container hidden min-h-screen w-full relative bg-cover bg-center overflow-x-hidden pt-24 pb-16 px-4 sm:px-12 flex flex-col items-center justify-center" style="background-image: url('assets/about_renaissance_bg.jpg');">
+        
+        <div class="absolute inset-0 bg-black/60 pointer-events-none z-[1]"></div>
+        <div class="absolute inset-0 bg-radial-gradient pointer-events-none z-[2]" style="background: radial-gradient(circle at center, transparent 35%, rgba(20,10,2,0.85) 100%);"></div>
+
+        <div class="relative z-20 max-w-6xl w-full mx-auto space-y-6">
+            
+            <!-- Breadcrumb Navigation Bar -->
+            <div class="flex items-center justify-between w-full pb-2 border-b border-amber-500/25">
+                <button onclick="switchView('main-site-view')" class="flex items-center space-x-2 text-xs font-mono text-slate-300 hover:text-white transition px-3.5 py-1.5 rounded-xl bg-black/50 border border-amber-400/30 hover:border-amber-400 shadow-lg">
+                    <i class="fas fa-arrow-left text-amber-400"></i>
+                    <span>RETURN TO CITADEL</span>
+                </button>
+                <div class="hidden sm:flex items-center space-x-2 font-mono text-[11px] text-slate-400">
+                    <span class="cursor-pointer hover:text-white transition" onclick="switchView('main-site-view')">HOME</span>
+                    <span>/</span>
+                    <span class="text-amber-400 font-bold">ABOUT 30TH EDITION</span>
+                </div>
+            </div>
+
+            <div class="text-center pt-1 pb-2">
+                <h1 class="about-title-text font-cinzelDeco font-black text-4xl sm:text-6xl tracking-[0.2em] uppercase select-none">
+                    ABOUT US
+                </h1>
+            </div>
+
+            <!-- Legacy Overview Card -->
+            <div class="view-themed-card p-6 sm:p-8 rounded-2xl border border-amber-400/40">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="gold-tab-badge">30 YEARS OF EXCELLENCE</span>
+                    <span class="font-mono text-xs text-amber-300">ESTD. 1998 // IIT BOMBAY</span>
+                </div>
+
+                <h3 class="font-cinzel font-bold text-2xl sm:text-3xl text-white mb-3">
+                    Asia's Largest Science & Technology Festival
+                </h3>
+
+                <p class="text-slate-300 text-xs sm:text-sm font-grotesk leading-relaxed mb-4">
+                    Born in 1998 with the vision to provide a platform for student engineers to demonstrate their technical acumen, Techfest has surged into a global movement. Spanning 3 electric days at IIT Bombay, it unites the highest tiers of innovation, from mechanical robotics and aerospace engineering to artificial superintelligence and digital arts.
+                </p>
+
+                <!-- Impact Metrics Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 py-3 border-y border-white/10 font-mono text-center">
+                    <div class="p-3 bg-black/40 rounded-xl">
+                        <div class="font-cinzel font-bold text-2xl text-tf-gold">175,000+</div>
+                        <div class="text-[10px] text-slate-400 uppercase mt-0.5">Footfall</div>
+                    </div>
+                    <div class="p-3 bg-black/40 rounded-xl">
+                        <div class="font-cinzel font-bold text-2xl text-tf-cyan">2,500+</div>
+                        <div class="text-[10px] text-slate-400 uppercase mt-0.5">Colleges</div>
+                    </div>
+                    <div class="p-3 bg-black/40 rounded-xl">
+                        <div class="font-cinzel font-bold text-2xl text-rose-400">₹45 LAKH+</div>
+                        <div class="text-[10px] text-slate-400 uppercase mt-0.5">Prize Pool</div>
+                    </div>
+                    <div class="p-3 bg-black/40 rounded-xl">
+                        <div class="font-cinzel font-bold text-2xl text-purple-400">50+</div>
+                        <div class="text-[10px] text-slate-400 uppercase mt-0.5">Countries</div>
+                    </div>
+                </div>
+
+                <!-- Patronages -->
+                <div class="pt-4 flex flex-wrap items-center justify-between text-xs font-mono text-slate-300 gap-3">
+                    <div class="flex items-center gap-2"><i class="fas fa-award text-tf-gold"></i> UNESCO Patronage</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-award text-tf-cyan"></i> UNICEF Endorsement</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-award text-rose-400"></i> Make In India Recognition</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-award text-purple-400"></i> Digital India Initiative</div>
+                </div>
+            </div>
+
+            <!-- Vision Statement -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="view-themed-card p-6 rounded-2xl border border-amber-400/30 space-y-2">
+                    <span class="gold-tab-badge">THE MOTTO</span>
+                    <h4 class="font-cinzel font-bold text-lg text-white">Innovate • Transcend • Inspire</h4>
+                    <p class="text-slate-300 text-xs font-grotesk leading-relaxed">
+                        To ignite the spark of scientific curiosity across youth and provide boundless resources for groundbreaking prototypes to transition into real-world human solutions.
+                    </p>
+                </div>
+                <div class="view-themed-card p-6 rounded-2xl border border-amber-400/30 space-y-2">
+                    <span class="gold-tab-badge">POWAI CAMPUS</span>
+                    <h4 class="font-cinzel font-bold text-lg text-white">The Epicenter at IIT Bombay</h4>
+                    <p class="text-slate-300 text-xs font-grotesk leading-relaxed">
+                        Surrounded by the serene waters of Powai Lake and lush green hills, the 550-acre IIT Bombay campus transforms into a vibrant high-tech city of dreams every December.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- VIEW CONTAINER 7: ACCOMMODATION & POWAI PAVILION VIEW -->
+    <div id="accommodation-page-view" class="view-container hidden min-h-screen w-full relative bg-cover bg-center overflow-x-hidden pt-24 pb-16 px-4 sm:px-12 flex flex-col items-center justify-center" style="background-image: url('assets/accommodation_pavilion_bg.jpg');">
+        
+        <div class="absolute inset-0 bg-black/60 pointer-events-none z-[1]"></div>
+        <div class="absolute inset-0 bg-radial-gradient pointer-events-none z-[2]" style="background: radial-gradient(circle at center, transparent 35%, rgba(14,6,2,0.88) 100%);"></div>
+
+        <div class="relative z-20 max-w-6xl w-full mx-auto space-y-6">
+            
+            <!-- Breadcrumb Navigation Bar -->
+            <div class="flex items-center justify-between w-full pb-2 border-b border-amber-500/25">
+                <button onclick="switchView('main-site-view')" class="flex items-center space-x-2 text-xs font-mono text-slate-300 hover:text-white transition px-3.5 py-1.5 rounded-xl bg-black/50 border border-amber-400/30 hover:border-amber-400 shadow-lg">
+                    <i class="fas fa-arrow-left text-tf-gold"></i>
+                    <span>RETURN TO CITADEL</span>
+                </button>
+                <div class="hidden sm:flex items-center space-x-2 font-mono text-[11px] text-slate-400">
+                    <span class="cursor-pointer hover:text-white transition" onclick="switchView('main-site-view')">HOME</span>
+                    <span>/</span>
+                    <span class="text-amber-400 font-bold">ACCOMMODATION</span>
+                </div>
+            </div>
+
+            <div class="text-center pt-1 pb-2">
+                <h1 class="accommodation-title-text font-cinzelDeco font-black text-4xl sm:text-6xl tracking-[0.2em] uppercase select-none">
+                    ACCOMMODATION
+                </h1>
+            </div>
+
+            <!-- Status Header -->
+            <div class="flex flex-col sm:flex-row items-center justify-between border-b border-amber-500/30 pb-4 gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-amber-950/70 border border-amber-400/50 flex items-center justify-center text-amber-300 text-xl shadow-lg">
+                        <i class="fas fa-hotel"></i>
+                    </div>
+                    <div>
+                        <span class="font-mono text-xs text-amber-400 block tracking-widest">CAMPUS RESIDENCE // POWAI CITADEL</span>
+                        <h3 class="font-grotesk font-bold text-xl text-white">Student Guest Hostels & Delegate Living Pavilions</h3>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-3 font-mono text-xs">
+                    <span class="px-3.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-400/40 font-bold">
+                        DEC 15 - 19, 2026
+                    </span>
+                    <span class="px-3.5 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 font-bold">
+                        ROOMS AVAILABLE
+                    </span>
+                </div>
+            </div>
+
+            <!-- Grid Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left Details Box -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="view-themed-card p-6 rounded-2xl border border-amber-500/40 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="gold-tab-badge">IIT BOMBAY HOSTELS</span>
+                            <span class="font-mono text-xs text-amber-300 font-bold">₹2,499 / DELEGATE</span>
+                        </div>
+
+                        <div>
+                            <h3 class="font-cinzel font-bold text-xl text-white mb-2">Citadel Residence Pass</h3>
+                            <p class="text-slate-300 text-xs font-grotesk leading-relaxed">
+                                Experience 4 nights & 5 days staying directly inside the serene IIT Bombay Powai campus. Safe, verified, and fully integrated with festival transportation.
+                            </p>
+                        </div>
+
+                        <div class="pt-3 border-t border-white/10 space-y-2.5 font-mono text-xs">
+                            <div class="flex items-center gap-2.5 text-slate-300">
+                                <i class="fas fa-bed text-amber-400"></i>
+                                <span>Comfortable bed, mattress & clean linen provided</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-slate-300">
+                                <i class="fas fa-utensils text-amber-400"></i>
+                                <span>Mess Dining Pass: Breakfast, Lunch & Dinner</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-slate-300">
+                                <i class="fas fa-wifi text-amber-400"></i>
+                                <span>High-speed campus Wi-Fi 6 network access</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-slate-300">
+                                <i class="fas fa-bus text-amber-400"></i>
+                                <span>Campus internal shuttle frequency (every 15 mins)</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 text-slate-300">
+                                <i class="fas fa-shield-halved text-amber-400"></i>
+                                <span>24/7 campus security & medical hospital center</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-white/10">
+                            <div class="font-mono text-[11px] text-slate-400 flex items-center gap-2">
+                                <i class="fas fa-phone-alt text-amber-400"></i>
+                                <span>Hostel Helpline: +91 22 2576 4056</span>
+                            </div>
+                            <div class="font-mono text-[11px] text-slate-400 flex items-center gap-2 mt-1">
+                                <i class="fas fa-envelope text-amber-400"></i>
+                                <span>accommodation@techfest.org</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Booking Form -->
+                <div class="lg:col-span-7">
+                    <div class="view-themed-card p-6 sm:p-8 rounded-2xl border border-amber-500/40">
+                        <span class="gold-tab-badge">INSTANT BOOKING</span>
+                        <h3 class="font-cinzel font-bold text-2xl text-white mt-2 mb-4">Reserve Your Festival Accommodation</h3>
+
+                        <form onsubmit="handleAccommodationBooking(event)" class="space-y-4 font-mono text-xs">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-slate-300 mb-1">DELEGATE NAME</label>
+                                    <input type="text" id="accom-name" required value="Mohammad Irfan" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-400">
+                                </div>
+                                <div>
+                                    <label class="block text-slate-300 mb-1">EMAIL ADDRESS</label>
+                                    <input type="email" id="accom-email" required value="mohammadirfan9403@gmail.com" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-400">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-slate-300 mb-1">PHONE NUMBER</label>
+                                    <input type="tel" id="accom-phone" required value="+91 94039 82726" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-400">
+                                </div>
+                                <div>
+                                    <label class="block text-slate-300 mb-1">COLLEGE / INSTITUTION</label>
+                                    <input type="text" id="accom-college" required placeholder="Your University Name" value="Indian Institute of Technology" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-400">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-slate-300 mb-1">HOSTEL WING PREFERENCE</label>
+                                    <select id="accom-wing" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-400">
+                                        <option value="Male Hostel Wing (Hostel 12 - 16)">Male Hostel Wing (Hostel 12 - 16)</option>
+                                        <option value="Female Hostel Wing (Hostel 15)">Female Hostel Wing (Hostel 15)</option>
+                                        <option value="Co-ed Delegation Suite (Guest House)">Co-ed Delegation Suite (Guest House)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-slate-300 mb-1">NUMBER OF DELEGATES</label>
+                                    <select id="accom-count" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-amber-400">
+                                        <option value="1">1 Person (Solo Delegate)</option>
+                                        <option value="2">2 Persons (Duo Room)</option>
+                                        <option value="3">3 Persons (Triple Room)</option>
+                                        <option value="4">4 Persons (Squad Quad)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-black font-grotesk font-bold text-xs uppercase tracking-wider hover:opacity-95 transition shadow-lg shadow-amber-950/50 flex items-center justify-center gap-2">
+                                <i class="fas fa-check-circle"></i>
+                                <span>CONFIRM &amp; SECURE ACCOMMODATION PASS</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- VIEW CONTAINER 8: WORKSHOPS & CERTIFIED MASTERCLASSES VIEW -->
+    <div id="workshops-page-view" class="view-container hidden min-h-screen w-full relative bg-cover bg-center overflow-x-hidden pt-24 pb-16 px-4 sm:px-12 flex flex-col items-center justify-center" style="background-image: url('assets/workshops_lab_bg.jpg');">
+        
+        <div class="absolute inset-0 bg-black/60 pointer-events-none z-[1]"></div>
+        <div class="absolute inset-0 bg-radial-gradient pointer-events-none z-[2]" style="background: radial-gradient(circle at center, transparent 35%, rgba(4,15,25,0.88) 100%);"></div>
+
+        <div class="relative z-20 max-w-6xl w-full mx-auto space-y-6">
+            
+            <!-- Breadcrumb Navigation Bar -->
+            <div class="flex items-center justify-between w-full pb-2 border-b border-cyan-500/25">
+                <button onclick="switchView('main-site-view')" class="flex items-center space-x-2 text-xs font-mono text-slate-300 hover:text-white transition px-3.5 py-1.5 rounded-xl bg-black/50 border border-cyan-400/30 hover:border-cyan-400 shadow-lg">
+                    <i class="fas fa-arrow-left text-tf-cyan"></i>
+                    <span>RETURN TO CITADEL</span>
+                </button>
+                <div class="hidden sm:flex items-center space-x-2 font-mono text-[11px] text-slate-400">
+                    <span class="cursor-pointer hover:text-white transition" onclick="switchView('main-site-view')">HOME</span>
+                    <span>/</span>
+                    <span class="text-cyan-400 font-bold">WORKSHOPS</span>
+                </div>
+            </div>
+
+            <div class="text-center pt-1 pb-2">
+                <h1 class="workshops-title-text font-cinzelDeco font-black text-4xl sm:text-6xl tracking-[0.2em] uppercase select-none">
+                    WORKSHOPS
+                </h1>
+            </div>
+
+            <!-- Header Status Bar -->
+            <div class="flex flex-col sm:flex-row items-center justify-between border-b border-cyan-500/25 pb-4 gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-cyan-950/70 border border-cyan-400/50 flex items-center justify-center text-cyan-400 text-xl shadow-lg">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div>
+                        <span class="font-mono text-xs text-cyan-400 block tracking-widest">TECHFEST ACADEMY // CERTIFIED TRACKS</span>
+                        <h3 class="font-grotesk font-bold text-xl text-white">Hands-on Technical Masterclasses (IIT Bombay Certified)</h3>
+                    </div>
+                </div>
+
+                <!-- Workshop Filter Tabs -->
+                <div class="flex flex-wrap items-center gap-2 font-mono text-xs">
+                    <button onclick="filterWorkshopsCards('all', this)" class="ws-filter-btn active px-3.5 py-1.5 rounded-xl bg-cyan-500 text-black font-bold border border-cyan-400">
+                        ALL
+                    </button>
+                    <button onclick="filterWorkshopsCards('robotics', this)" class="ws-filter-btn px-3.5 py-1.5 rounded-xl bg-black/60 text-slate-300 hover:text-white border border-white/20">
+                        ROBOTICS
+                    </button>
+                    <button onclick="filterWorkshopsCards('ai', this)" class="ws-filter-btn px-3.5 py-1.5 rounded-xl bg-black/60 text-slate-300 hover:text-white border border-white/20">
+                        AI &amp; ML
+                    </button>
+                    <button onclick="filterWorkshopsCards('aerospace', this)" class="ws-filter-btn px-3.5 py-1.5 rounded-xl bg-black/60 text-slate-300 hover:text-white border border-white/20">
+                        AEROSPACE
+                    </button>
+                    <button onclick="filterWorkshopsCards('cyber', this)" class="ws-filter-btn px-3.5 py-1.5 rounded-xl bg-black/60 text-slate-300 hover:text-white border border-white/20">
+                        CYBER
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6 Workshops Grid -->
+            <div id="workshops-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Workshop 1 -->
+                <div class="view-themed-card ws-card p-6 rounded-2xl border border-cyan-400/30 flex flex-col justify-between group hover:border-cyan-400 transition" data-category="robotics">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="cyan-tab-badge">ROBOTICS</span>
+                            <span class="font-mono text-[10px] text-slate-400">16 HRS // 2 DAYS</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-cyan-300 transition mb-2">Autonomous Bipedal Robotics</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Hands-on assembly of 12-DOF bipedal walking robot using ROS 2, inverse kinematics equations, and micro-servo drivers.
+                        </p>
+                        <div class="font-mono text-[11px] text-slate-400 space-y-1 mb-4">
+                            <div><i class="fas fa-certificate text-cyan-400 mr-1.5"></i> Certificate by IIT Bombay</div>
+                            <div><i class="fas fa-box text-cyan-400 mr-1.5"></i> Take-home Hardware Kit Included</div>
+                        </div>
+                    </div>
+                    <button onclick="enrollAlert('Autonomous Bipedal Robotics')" class="w-full py-2.5 bg-cyan-500/20 hover:bg-cyan-500 hover:text-black border border-cyan-400/40 rounded-xl text-xs font-mono font-bold transition flex items-center justify-center gap-1.5">
+                        <i class="fas fa-ticket-alt"></i> ENROLL IN MASTERCLASS
+                    </button>
+                </div>
+
+                <!-- Workshop 2 -->
+                <div class="view-themed-card ws-card p-6 rounded-2xl border border-cyan-400/30 flex flex-col justify-between group hover:border-cyan-400 transition" data-category="ai">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="cyan-tab-badge">AI &amp; ML</span>
+                            <span class="font-mono text-[10px] text-slate-400">16 HRS // 2 DAYS</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-cyan-300 transition mb-2">Generative AI &amp; Agentic Systems</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Build autonomous multi-agent reasoning loops using LangChain, Gemini multimodal APIs, vector databases, and local Ollama inference.
+                        </p>
+                        <div class="font-mono text-[11px] text-slate-400 space-y-1 mb-4">
+                            <div><i class="fas fa-certificate text-cyan-400 mr-1.5"></i> Certificate by IIT Bombay</div>
+                            <div><i class="fas fa-cloud text-cyan-400 mr-1.5"></i> $100 Cloud Compute Credits</div>
+                        </div>
+                    </div>
+                    <button onclick="enrollAlert('Generative AI & Agentic Systems')" class="w-full py-2.5 bg-cyan-500/20 hover:bg-cyan-500 hover:text-black border border-cyan-400/40 rounded-xl text-xs font-mono font-bold transition flex items-center justify-center gap-1.5">
+                        <i class="fas fa-ticket-alt"></i> ENROLL IN MASTERCLASS
+                    </button>
+                </div>
+
+                <!-- Workshop 3 -->
+                <div class="view-themed-card ws-card p-6 rounded-2xl border border-cyan-400/30 flex flex-col justify-between group hover:border-cyan-400 transition" data-category="aerospace">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="cyan-tab-badge">AEROSPACE</span>
+                            <span class="font-mono text-[10px] text-slate-400">16 HRS // 2 DAYS</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-cyan-300 transition mb-2">FPV Autonomous Drone Swarms</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Quadcopter aerodynamics, brushless motor telemetry, Betaflight tuning, and inter-drone formation flying algorithms.
+                        </p>
+                        <div class="font-mono text-[11px] text-slate-400 space-y-1 mb-4">
+                            <div><i class="fas fa-certificate text-cyan-400 mr-1.5"></i> Certificate by IIT Bombay</div>
+                            <div><i class="fas fa-plane-departure text-cyan-400 mr-1.5"></i> Flight Testing in Gymkhana</div>
+                        </div>
+                    </div>
+                    <button onclick="enrollAlert('FPV Autonomous Drone Swarms')" class="w-full py-2.5 bg-cyan-500/20 hover:bg-cyan-500 hover:text-black border border-cyan-400/40 rounded-xl text-xs font-mono font-bold transition flex items-center justify-center gap-1.5">
+                        <i class="fas fa-ticket-alt"></i> ENROLL IN MASTERCLASS
+                    </button>
+                </div>
+
+                <!-- Workshop 4 -->
+                <div class="view-themed-card ws-card p-6 rounded-2xl border border-cyan-400/30 flex flex-col justify-between group hover:border-cyan-400 transition" data-category="ai">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="cyan-tab-badge">QUANTUM</span>
+                            <span class="font-mono text-[10px] text-slate-400">16 HRS // 2 DAYS</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-cyan-300 transition mb-2">Quantum Computing &amp; Qiskit</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Quantum state vectors, superposition, entanglement, Grover search algorithm, and live execution on IBM Quantum computers.
+                        </p>
+                        <div class="font-mono text-[11px] text-slate-400 space-y-1 mb-4">
+                            <div><i class="fas fa-certificate text-cyan-400 mr-1.5"></i> Certificate by IIT Bombay</div>
+                            <div><i class="fas fa-atom text-cyan-400 mr-1.5"></i> Live Quantum Simulator Access</div>
+                        </div>
+                    </div>
+                    <button onclick="enrollAlert('Quantum Computing & Qiskit')" class="w-full py-2.5 bg-cyan-500/20 hover:bg-cyan-500 hover:text-black border border-cyan-400/40 rounded-xl text-xs font-mono font-bold transition flex items-center justify-center gap-1.5">
+                        <i class="fas fa-ticket-alt"></i> ENROLL IN MASTERCLASS
+                    </button>
+                </div>
+
+                <!-- Workshop 5 -->
+                <div class="view-themed-card ws-card p-6 rounded-2xl border border-cyan-400/30 flex flex-col justify-between group hover:border-cyan-400 transition" data-category="robotics">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="cyan-tab-badge">EMBEDDED</span>
+                            <span class="font-mono text-[10px] text-slate-400">16 HRS // 2 DAYS</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-cyan-300 transition mb-2">Industrial Edge IoT &amp; LoRaWAN</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            ESP32 microcontrollers, LoRaWAN long-range RF communication, MQTT telemetry brokers, and edge TinyML neural classifiers.
+                        </p>
+                        <div class="font-mono text-[11px] text-slate-400 space-y-1 mb-4">
+                            <div><i class="fas fa-certificate text-cyan-400 mr-1.5"></i> Certificate by IIT Bombay</div>
+                            <div><i class="fas fa-microchip text-cyan-400 mr-1.5"></i> Hardware Development Kit</div>
+                        </div>
+                    </div>
+                    <button onclick="enrollAlert('Industrial Edge IoT & LoRaWAN')" class="w-full py-2.5 bg-cyan-500/20 hover:bg-cyan-500 hover:text-black border border-cyan-400/40 rounded-xl text-xs font-mono font-bold transition flex items-center justify-center gap-1.5">
+                        <i class="fas fa-ticket-alt"></i> ENROLL IN MASTERCLASS
+                    </button>
+                </div>
+
+                <!-- Workshop 6 -->
+                <div class="view-themed-card ws-card p-6 rounded-2xl border border-cyan-400/30 flex flex-col justify-between group hover:border-cyan-400 transition" data-category="cyber">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="cyan-tab-badge">CYBER DEFENSE</span>
+                            <span class="font-mono text-[10px] text-slate-400">16 HRS // 2 DAYS</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-cyan-300 transition mb-2">Offensive Security &amp; CTF</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Binary reverse engineering, buffer overflow attacks, privilege escalation, and real-time Capture The Flag challenge exploitation.
+                        </p>
+                        <div class="font-mono text-[11px] text-slate-400 space-y-1 mb-4">
+                            <div><i class="fas fa-certificate text-cyan-400 mr-1.5"></i> Certificate by IIT Bombay</div>
+                            <div><i class="fas fa-shield text-cyan-400 mr-1.5"></i> Certified Ethical Security Badge</div>
+                        </div>
+                    </div>
+                    <button onclick="enrollAlert('Offensive Security & CTF')" class="w-full py-2.5 bg-cyan-500/20 hover:bg-cyan-500 hover:text-black border border-cyan-400/40 rounded-xl text-xs font-mono font-bold transition flex items-center justify-center gap-1.5">
+                        <i class="fas fa-ticket-alt"></i> ENROLL IN MASTERCLASS
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- VIEW CONTAINER 9: COMPETITIONS & ROBOWARS ARENA VIEW -->
+    <div id="competitions-page-view" class="view-container hidden min-h-screen w-full relative bg-cover bg-center overflow-x-hidden pt-24 pb-16 px-4 sm:px-12 flex flex-col items-center justify-center" style="background-image: url('assets/competitions_arena_bg.jpg');">
+        
+        <div class="absolute inset-0 bg-black/60 pointer-events-none z-[1]"></div>
+        <div class="absolute inset-0 bg-radial-gradient pointer-events-none z-[2]" style="background: radial-gradient(circle at center, transparent 35%, rgba(20,4,4,0.88) 100%);"></div>
+
+        <div class="relative z-20 max-w-6xl w-full mx-auto space-y-6">
+            
+            <!-- Breadcrumb Navigation Bar -->
+            <div class="flex items-center justify-between w-full pb-2 border-b border-red-500/25">
+                <button onclick="switchView('main-site-view')" class="flex items-center space-x-2 text-xs font-mono text-slate-300 hover:text-white transition px-3.5 py-1.5 rounded-xl bg-black/50 border border-red-400/30 hover:border-red-400 shadow-lg">
+                    <i class="fas fa-arrow-left text-red-400"></i>
+                    <span>RETURN TO CITADEL</span>
+                </button>
+                <div class="hidden sm:flex items-center space-x-2 font-mono text-[11px] text-slate-400">
+                    <span class="cursor-pointer hover:text-white transition" onclick="switchView('main-site-view')">HOME</span>
+                    <span>/</span>
+                    <span class="text-red-400 font-bold">COMPETITIONS</span>
+                </div>
+            </div>
+
+            <div class="text-center pt-1 pb-2">
+                <h1 class="competitions-title-text font-cinzelDeco font-black text-4xl sm:text-6xl tracking-[0.2em] uppercase select-none">
+                    COMPETITIONS
+                </h1>
+            </div>
+
+            <!-- Header Status Bar -->
+            <div class="flex flex-col sm:flex-row items-center justify-between border-b border-red-500/30 pb-4 gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-red-950/70 border border-red-500/50 flex items-center justify-center text-red-400 text-xl shadow-lg">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div>
+                        <span class="font-mono text-xs text-red-400 block tracking-widest">ARENA CHAMPIONSHIPS // 25+ CHALLENGES</span>
+                        <h3 class="font-grotesk font-bold text-xl text-white">Asia's Most Ruthless Engineering Tournament Grounds</h3>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-3 font-mono text-xs">
+                    <span class="px-3.5 py-1.5 rounded-xl bg-red-600/20 text-red-300 border border-red-500/40 font-bold">
+                        ₹45,00,000+ PRIZE POOL
+                    </span>
+                    <span class="px-3.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-400/40 font-bold">
+                        GLOBAL ENTRIES
+                    </span>
+                </div>
+            </div>
+
+            <!-- 6 Competitions Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Comp 1 -->
+                <div class="view-themed-card p-6 rounded-2xl border border-red-500/40 flex flex-col justify-between group hover:border-red-500 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="red-tab-badge">ROBOTICS COMBAT</span>
+                            <span class="font-mono text-xs text-red-400 font-bold">₹12,00,000</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-red-400 transition mb-2">Robowars: 60kg Heavyweight</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Hardened steel spinning drums, pneumatic flippers, and armored chassis clash in brutal 3-minute combat inside the Lexan colosseum.
+                        </p>
+                        <div class="font-mono text-[11px] text-slate-400 space-y-1 mb-4">
+                            <div><i class="fas fa-users text-red-400 mr-1.5"></i> Team Size: Up to 5 Members</div>
+                            <div><i class="fas fa-location-dot text-red-400 mr-1.5"></i> Robowars Arena (Gymkhana)</div>
+                        </div>
+                    </div>
+                    <button onclick="registerEventFromList('Robowars 60kg')" class="w-full py-2.5 bg-red-500/20 hover:bg-red-500 hover:text-white border border-red-500/40 rounded-xl text-xs font-mono font-bold transition flex items-center justify-center gap-1.5">
+                        <i class="fas fa-crosshairs"></i> REGISTER SQUAD
+                    </button>
+                </div>
+
+                <!-- Comp 2 -->
+                <div class="view-themed-card p-6 rounded-2xl border border-red-500/40 flex flex-col justify-between group hover:border-red-500 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="red-tab-badge">ROBOTICS COMBAT</span>
+                            <span class="font-mono text-xs text-red-400 font-bold">₹5,00,000</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-red-400 transition mb-2">Robowars: 15kg Featherweight</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Lightning-quick vertical disc spinners and wedge bots in high-velocity kinetic destruction.
+                        </p>
+                        <div class="font-mono text-[11px] text-slate-400 space-y-1 mb-4">
+                            <div><i class="fas fa-users text-red-400 mr-1.5"></i> Team Size: Up to 4 Members</div>
+                            <div><i class="fas fa-location-dot text-red-400 mr-1.5"></i> Robowars Arena B</div>
+                        </div>
+                    </div>
+                    <button onclick="registerEventFromList('Robowars 15kg')" class="w-full py-2.5 bg-red-500/20 hover:bg-red-500 hover:text-white border border-red-500/40 rounded-xl text-xs font-mono font-bold transition flex items-center justify-center gap-1.5">
+                        <i class="fas fa-crosshairs"></i> REGISTER SQUAD
+                    </button>
+                </div>
+
+                <!-- Comp 3 -->
+                <div class="view-themed-card p-6 rounded-2xl border border-red-500/40 flex flex-col justify-between group hover:border-red-500 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="gold-tab-badge">AUTONOMOUS</span>
+                            <span class="font-mono text-xs text-amber-400 font-bold">₹2,50,000</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-amber-400 transition mb-2">Meshmerize: Maze Solver</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Microrobots solve dynamic branching mazes autonomously with flood-fill, A* algorithms, and optical line arrays.
+                        </p>
+                        <div class="font-mono text-[11px] text-slate-400 space-y-1 mb-4">
+                            <div><i class="fas fa-users text-amber-400 mr-1.5"></i> Team Size: 1-4 Members</div>
+                            <div><i class="fas fa-location-dot text-amber-400 mr-1.5"></i> Indoor Sports Arena</div>
+                        </div>
+                    </div>
+                    <button onclick="registerEventFromList('Meshmerize Maze')" class="w-full py-2.5 bg-amber-500/20 hover:bg-amber-500 hover:text-black border border-amber-400/40 rounded-xl text-xs font-mono font-bold transition flex items-center justify-center gap-1.5">
+                        <i class="fas fa-crosshairs"></i> REGISTER SQUAD
+                    </button>
+                </div>
+
+                <!-- Comp 4 -->
+                <div class="view-themed-card p-6 rounded-2xl border border-red-500/40 flex flex-col justify-between group hover:border-red-500 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="cyan-tab-badge">AEROSPACE</span>
+                            <span class="font-mono text-xs text-cyan-400 font-bold">₹4,00,000</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-cyan-400 transition mb-2">Boeing National Aeromodelling</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Design and pilot fixed-wing RC planes through treacherous pylon slalom gates with precision humanitarian payload drops.
+                        </p>
+                        <div class="font-mono text-[11px] text-slate-400 space-y-1 mb-4">
+                            <div><i class="fas fa-users text-cyan-400 mr-1.5"></i> Team Size: Up to 4 Members</div>
+                            <div><i class="fas fa-location-dot text-cyan-400 mr-1.5"></i> Gymkhana Flying Field</div>
+                        </div>
+                    </div>
+                    <button onclick="registerEventFromList('Boeing Aeromodelling')" class="w-full py-2.5 bg-cyan-500/20 hover:bg-cyan-500 hover:text-black border border-cyan-400/40 rounded-xl text-xs font-mono font-bold transition flex items-center justify-center gap-1.5">
+                        <i class="fas fa-crosshairs"></i> REGISTER SQUAD
+                    </button>
+                </div>
+
+                <!-- Comp 5 -->
+                <div class="view-themed-card p-6 rounded-2xl border border-red-500/40 flex flex-col justify-between group hover:border-red-500 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="purple-tab-badge">AI HACKATHON</span>
+                            <span class="font-mono text-xs text-purple-400 font-bold">₹6,00,000</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-purple-400 transition mb-2">36-Hour Autonomous AI Hack</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Non-stop 36-hour sprint building real-world autonomous agents, neuro-symbolic reasoning tools, and spatial computing interfaces.
+                        </p>
+                        <div class="font-mono text-[11px] text-slate-400 space-y-1 mb-4">
+                            <div><i class="fas fa-users text-purple-400 mr-1.5"></i> Team Size: 2-4 Members</div>
+                            <div><i class="fas fa-location-dot text-purple-400 mr-1.5"></i> VMCC Complex</div>
+                        </div>
+                    </div>
+                    <button onclick="registerEventFromList('Autonomous AI Hackathon')" class="w-full py-2.5 bg-purple-500/20 hover:bg-purple-500 hover:text-white border border-purple-400/40 rounded-xl text-xs font-mono font-bold transition flex items-center justify-center gap-1.5">
+                        <i class="fas fa-crosshairs"></i> REGISTER SQUAD
+                    </button>
+                </div>
+
+                <!-- Comp 6 -->
+                <div class="view-themed-card p-6 rounded-2xl border border-red-500/40 flex flex-col justify-between group hover:border-red-500 transition">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="red-tab-badge">ROBOTICS</span>
+                            <span class="font-mono text-xs text-red-400 font-bold">₹2,00,000</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white group-hover:text-red-400 transition mb-2">Cozmo Clench: Arm Manipulator</h4>
+                        <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                            Multi-joint precision robotic arm navigation through challenging terrain to retrieve hazardous energy canisters.
+                        </p>
+                        <div class="font-mono text-[11px] text-slate-400 space-y-1 mb-4">
+                            <div><i class="fas fa-users text-red-400 mr-1.5"></i> Team Size: Up to 4 Members</div>
+                            <div><i class="fas fa-location-dot text-red-400 mr-1.5"></i> SAC Quadrangle</div>
+                        </div>
+                    </div>
+                    <button onclick="registerEventFromList('Cozmo Clench')" class="w-full py-2.5 bg-red-500/20 hover:bg-red-500 hover:text-white border border-red-500/40 rounded-xl text-xs font-mono font-bold transition flex items-center justify-center gap-1.5">
+                        <i class="fas fa-crosshairs"></i> REGISTER SQUAD
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- VIEW CONTAINER 10: IGNITE & VENTURE SUMMIT VIEW -->
+    <div id="ignite-page-view" class="view-container hidden min-h-screen w-full relative bg-cover bg-center overflow-x-hidden pt-24 pb-16 px-4 sm:px-12 flex flex-col items-center justify-center" style="background-image: url('assets/ignite_summit_bg.jpg');">
+        
+        <div class="absolute inset-0 bg-black/60 pointer-events-none z-[1]"></div>
+        <div class="absolute inset-0 bg-radial-gradient pointer-events-none z-[2]" style="background: radial-gradient(circle at center, transparent 35%, rgba(18,2,25,0.88) 100%);"></div>
+
+        <div class="relative z-20 max-w-6xl w-full mx-auto space-y-6">
+            
+            <!-- Breadcrumb Navigation Bar -->
+            <div class="flex items-center justify-between w-full pb-2 border-b border-purple-500/25">
+                <button onclick="switchView('main-site-view')" class="flex items-center space-x-2 text-xs font-mono text-slate-300 hover:text-white transition px-3.5 py-1.5 rounded-xl bg-black/50 border border-purple-400/30 hover:border-purple-400 shadow-lg">
+                    <i class="fas fa-arrow-left text-purple-400"></i>
+                    <span>RETURN TO CITADEL</span>
+                </button>
+                <div class="hidden sm:flex items-center space-x-2 font-mono text-[11px] text-slate-400">
+                    <span class="cursor-pointer hover:text-white transition" onclick="switchView('main-site-view')">HOME</span>
+                    <span>/</span>
+                    <span class="text-purple-400 font-bold">IGNITE SUMMIT</span>
+                </div>
+            </div>
+
+            <div class="text-center pt-1 pb-2">
+                <h1 class="ignite-title-text font-cinzelDeco font-black text-4xl sm:text-6xl tracking-[0.2em] uppercase select-none">
+                    IGNITE
+                </h1>
+            </div>
+
+            <!-- Header Status Bar -->
+            <div class="flex flex-col sm:flex-row items-center justify-between border-b border-purple-500/30 pb-4 gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-purple-950/70 border border-purple-400/50 flex items-center justify-center text-purple-400 text-xl shadow-lg">
+                        <i class="fas fa-fire-flame-curved"></i>
+                    </div>
+                    <div>
+                        <span class="font-mono text-xs text-purple-400 block tracking-widest">VENTURE SUMMIT &amp; SEED GRANTS</span>
+                        <h3 class="font-grotesk font-bold text-xl text-white">Empowering Next-Generation Tech Founders at IIT Bombay</h3>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-3 font-mono text-xs">
+                    <span class="px-3.5 py-1.5 rounded-xl bg-purple-600/20 text-purple-300 border border-purple-400/40 font-bold">
+                        ₹25L SEED GRANTS
+                    </span>
+                    <span class="px-3.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-400/40 font-bold">
+                        50+ TOP VCS
+                    </span>
+                </div>
+            </div>
+
+            <!-- 3 Pillars Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="view-themed-card p-6 rounded-2xl border border-purple-500/30 space-y-2">
+                    <span class="purple-tab-badge">PILLAR 01</span>
+                    <h4 class="font-cinzel font-bold text-lg text-white">The VC Pitch Arena</h4>
+                    <p class="text-slate-300 text-xs font-grotesk leading-relaxed">
+                        Pitch your startup prototype directly to partners from Peak XV, Accel, Matrix, Blume, and premier angel networks for seed and Series A funding rounds.
+                    </p>
+                </div>
+                <div class="view-themed-card p-6 rounded-2xl border border-purple-500/30 space-y-2">
+                    <span class="purple-tab-badge">PILLAR 02</span>
+                    <h4 class="font-cinzel font-bold text-lg text-white">SINE IITB Incubation</h4>
+                    <p class="text-slate-300 text-xs font-grotesk leading-relaxed">
+                        Direct fast-track entry to IIT Bombay's premier incubator SINE with subsidized lab infrastructure, intellectual property filing support, and equity grants.
+                    </p>
+                </div>
+                <div class="view-themed-card p-6 rounded-2xl border border-purple-500/30 space-y-2">
+                    <span class="purple-tab-badge">PILLAR 03</span>
+                    <h4 class="font-cinzel font-bold text-lg text-white">Founder Masterclasses</h4>
+                    <p class="text-slate-300 text-xs font-grotesk leading-relaxed">
+                        Closed-door AMA sessions with unicorn founders, patent attorneys, and growth strategists sharing scaling playbooks and hardware engineering hacks.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Startup Pitch Application Card -->
+            <div class="view-themed-card p-6 sm:p-8 rounded-2xl border border-purple-500/40">
+                <span class="purple-tab-badge">STARTUP APPLICATION</span>
+                <h3 class="font-cinzel font-bold text-2xl text-white mt-2 mb-4">Submit Your Startup for Incubation &amp; Pitching</h3>
+
+                <form onsubmit="handleIgnitePitch(event)" class="space-y-4 font-mono text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-slate-300 mb-1">STARTUP / VENTURE NAME</label>
+                            <input type="text" id="ignite-startup-name" required placeholder="e.g. Aether Dynamics" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-purple-400">
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 mb-1">FOUNDER NAME</label>
+                            <input type="text" id="ignite-founder-name" required value="Mohammad Irfan" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-purple-400">
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 mb-1">CONTACT EMAIL</label>
+                            <input type="email" id="ignite-email" required value="mohammadirfan9403@gmail.com" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-purple-400">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-slate-300 mb-1">TECHNOLOGY SECTOR</label>
+                            <select id="ignite-sector" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-purple-400">
+                                <option value="Robotics & Hardware">Robotics &amp; Hardware</option>
+                                <option value="Artificial Intelligence / LLMs">Artificial Intelligence / LLMs</option>
+                                <option value="Aerospace & Defense">Aerospace &amp; Defense</option>
+                                <option value="CleanTech & Energy">CleanTech &amp; Energy</option>
+                                <option value="BioTech & Health">BioTech &amp; Health</option>
+                                <option value="FinTech / Web3">FinTech / Web3</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 mb-1">CURRENT STAGE</label>
+                            <select id="ignite-stage" class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-purple-400">
+                                <option value="Working Prototype / MVP">Working Prototype / MVP</option>
+                                <option value="Early Traction & Revenue">Early Traction &amp; Revenue</option>
+                                <option value="Idea & Research Paper">Idea &amp; Research Paper</option>
+                                <option value="Scaling / Series Pre-A">Scaling / Series Pre-A</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-slate-300 mb-1">PITCH DECK URL</label>
+                            <input type="url" id="ignite-deck" required placeholder="https://drive.google.com/..." class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-purple-400">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-300 mb-1">ONE-LINE ELEVATOR PITCH</label>
+                        <input type="text" id="ignite-pitch-desc" required placeholder="Describe what makes your innovation transformative in one sentence..." class="w-full bg-slate-900 border border-white/15 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-purple-400">
+                    </div>
+
+                    <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 via-fuchsia-600 to-indigo-600 text-white font-grotesk font-bold text-xs uppercase tracking-wider hover:opacity-95 transition shadow-lg shadow-purple-950/50 flex items-center justify-center gap-2">
+                        <i class="fas fa-rocket"></i>
+                        <span>SUBMIT PITCH FOR SINE INCUBATION &amp; VC SUMMIT</span>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Modal: CA Program -->
+    <div id="modal-ca-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="tf-modal-panel max-w-lg w-full rounded-2xl p-6 sm:p-8 relative">
+            <button onclick="closeModal('ca-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            <span class="font-mono text-xs text-tf-gold">COLLEGE AMBASSADOR</span>
+            <h3 class="font-cinzel font-bold text-2xl text-white mt-1 mb-3">Join the CA Network</h3>
+            <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                Represent Techfest, IIT Bombay at your university. Earn certificates signed by the director of IIT Bombay, free festival accommodation, and internship incentives!
+            </p>
+            <form onsubmit="handleCASubmit(event)" class="space-y-3 font-mono text-xs">
+                <input type="text" id="ca-input-name" required placeholder="Full Name" value="Mohammad Irfan" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-tf-gold">
+                <input type="text" id="ca-input-college" required placeholder="College / University" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-tf-gold">
+                <input type="email" id="ca-input-email" required placeholder="Email Address" value="mohammadirfan9403@gmail.com" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-tf-gold">
+                <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-tf-gold to-yellow-500 text-black font-bold uppercase tracking-wider hover:bg-white transition mt-2">
+                    SUBMIT CA APPLICATION
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Accommodation -->
+    <div id="modal-accommodation" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="tf-modal-panel max-w-lg w-full rounded-2xl p-6 sm:p-8 relative">
+            <button onclick="closeModal('accommodation')" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            <span class="font-mono text-xs text-tf-gold">HOSPITALITY PORTAL</span>
+            <h3 class="font-cinzel font-bold text-2xl text-white mt-1 mb-3">Campus Accommodation</h3>
+            <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                Stay at the iconic IIT Bombay hostels inside the Powai campus from 15th to 19th December. Experience campus life, mess food, lakefront walks, and 24/7 festival access.
+            </p>
+            <div class="bg-black/50 p-4 rounded-xl border border-white/10 font-mono text-xs space-y-2 mb-4">
+                <div class="flex justify-between"><span>Per Night Tariff:</span> <strong class="text-tf-cyan">₹600 / person</strong></div>
+                <div class="flex justify-between"><span>Includes:</span> <span class="text-slate-300">Bed, Mess Access, Wi-Fi</span></div>
+                <div class="flex justify-between"><span>Check-in:</span> <span class="text-slate-300">15th Dec 12:00 PM</span></div>
+            </div>
+            <button onclick="showToast('ACCOMMODATION PORTAL: REGISTRATIONS CONFIRMED'); closeModal('accommodation');" class="w-full py-3 rounded-xl bg-tf-gold text-black font-mono font-bold text-xs uppercase tracking-wider hover:bg-white transition">
+                BOOK HOSTEL STAY
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal: Workshops -->
+    <div id="modal-workshops" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="tf-modal-panel max-w-xl w-full rounded-2xl p-6 sm:p-8 relative max-h-[85vh] overflow-y-auto">
+            <button onclick="closeModal('workshops')" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            <span class="font-mono text-xs text-tf-gold">CERTIFIED WORKSHOPS</span>
+            <h3 class="font-cinzel font-bold text-2xl text-white mt-1 mb-3">Techfest Certified Workshops</h3>
+            <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                Select your preferred track to enroll. All participants receive signed certificates from Techfest, IIT Bombay.
+            </p>
+            <div class="space-y-3 font-mono text-xs">
+                <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex justify-between items-center">
+                    <div><strong>GenAI & Autonomous Agents</strong><div class="text-[11px] text-slate-400">NVIDIA Certified // 16 Hours</div></div>
+                    <button onclick="enrollAlert('GenAI & Autonomous Agents'); closeModal('workshops');" class="px-3 py-1.5 bg-tf-gold text-black rounded font-bold">₹1,499</button>
+                </div>
+                <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex justify-between items-center">
+                    <div><strong>ROS2 & Bipedal Robotics</strong><div class="text-[11px] text-slate-400">Hardware Lab // 14 Hours</div></div>
+                    <button onclick="enrollAlert('ROS2 & Bipedal Robotics'); closeModal('workshops');" class="px-3 py-1.5 bg-tf-cyan text-black rounded font-bold">₹1,799</button>
+                </div>
+                <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex justify-between items-center">
+                    <div><strong>Ethical Hacking & Zero-Days</strong><div class="text-[11px] text-slate-400">Cyber Warfare // 12 Hours</div></div>
+                    <button onclick="enrollAlert('Ethical Hacking & Zero-Days'); closeModal('workshops');" class="px-3 py-1.5 bg-tf-gold text-black rounded font-bold">₹1,299</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Competitions -->
+    <div id="modal-competitions" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="tf-modal-panel max-w-xl w-full rounded-2xl p-6 sm:p-8 relative max-h-[85vh] overflow-y-auto">
+            <button onclick="closeModal('competitions')" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            <span class="font-mono text-xs text-tf-cyan">ARENA OF THE MINDS</span>
+            <h3 class="font-cinzel font-bold text-2xl text-white mt-1 mb-3">Official Competitions Portal</h3>
+            <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                Register teams, download problem statements, and view live prize pools across 25+ categories.
+            </p>
+            <div class="space-y-3 font-mono text-xs">
+                <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex justify-between items-center">
+                    <div><strong>International Robowars</strong><div class="text-[11px] text-tf-gold">Prize: ₹12,00,000</div></div>
+                    <button onclick="openModal('robowars-reg'); closeModal('competitions');" class="px-3 py-1.5 bg-tf-cyan text-black rounded font-bold">REGISTER</button>
+                </div>
+                <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex justify-between items-center">
+                    <div><strong>Meshmerize Autonomous Maze</strong><div class="text-[11px] text-tf-gold">Prize: ₹2,50,000</div></div>
+                    <button onclick="registerEventFromList('Meshmerize'); closeModal('competitions');" class="px-3 py-1.5 bg-white/10 hover:bg-tf-cyan hover:text-black rounded font-bold">REGISTER</button>
+                </div>
+                <div class="p-3 bg-white/5 rounded-xl border border-white/10 flex justify-between items-center">
+                    <div><strong>Boeing National Aeromodelling</strong><div class="text-[11px] text-tf-gold">Prize: ₹3,50,000</div></div>
+                    <button onclick="registerEventFromList('Boeing Aeromodelling'); closeModal('competitions');" class="px-3 py-1.5 bg-white/10 hover:bg-tf-cyan hover:text-black rounded font-bold">REGISTER</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Ignite -->
+    <div id="modal-ignite" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="tf-modal-panel max-w-lg w-full rounded-2xl p-6 sm:p-8 relative">
+            <button onclick="closeModal('ignite')" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            <span class="font-mono text-xs text-tf-cyan">PAN-INDIA INITIATIVE</span>
+            <h3 class="font-cinzel font-bold text-2xl text-white mt-1 mb-3">Techfest Ignite</h3>
+            <p class="text-slate-300 text-xs font-grotesk leading-relaxed mb-4">
+                Ignite is Techfest's flagship outreach program establishing student technical bodies and regional innovation chapters in colleges across India.
+            </p>
+            <button onclick="showToast('IGNITE APPLICATION INITIATED'); closeModal('ignite');" class="w-full py-3 rounded-xl bg-tf-cyan text-black font-mono font-bold text-xs uppercase tracking-wider hover:bg-white transition">
+                APPLY FOR YOUR COLLEGE
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal: Robowars Registration -->
+    <div id="modal-robowars-reg" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="tf-modal-panel max-w-lg w-full rounded-2xl p-6 sm:p-8 relative">
+            <button onclick="closeModal('robowars-reg')" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+            <span class="font-mono text-xs text-tf-gold">COMBAT REGISTRATION</span>
+            <h3 class="font-cinzel font-bold text-2xl text-white mt-1 mb-2">Register Robowars Team</h3>
+            <p class="text-slate-400 text-xs font-mono mb-4">International Robowars // 60kg Heavyweight & 15kg Featherweight</p>
+            <form onsubmit="handleCombatRegister(event)" class="space-y-3 font-mono text-xs">
+                <div>
+                    <label class="block text-slate-400 mb-1">TEAM NAME</label>
+                    <input type="text" id="rw-team" required placeholder="e.g. BladeRunner Combat" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-tf-cyan">
+                </div>
+                <div>
+                    <label class="block text-slate-400 mb-1">WEIGHT CATEGORY</label>
+                    <select class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-tf-cyan">
+                        <option>60kg Heavyweight Class</option>
+                        <option>15kg Featherweight Class</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-slate-400 mb-1">CAPTAIN CONTACT EMAIL</label>
+                    <input type="email" required placeholder="captain@team.com" value="mohammadirfan9403@gmail.com" class="w-full bg-slate-900 border border-white/20 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-tf-cyan">
+                </div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-tf-gold text-black font-bold uppercase tracking-wider hover:bg-white transition mt-2">
+                    CONFIRM ROBOWARS ENTRY
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="tech-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] bg-slate-900 border border-tf-cyan/60 text-white font-mono text-xs px-6 py-3 rounded-xl shadow-2xl transition-all duration-300 transform translate-y-24 opacity-0 flex items-center space-x-3 pointer-events-none">
+        <i class="fas fa-bolt text-tf-cyan text-sm"></i>
+        <span id="tech-toast-msg">SYS_MESSAGE: ACTION_SUCCESS</span>
+    </div>
+
+    <!-- JAVASCRIPT & THREE.JS LOGIC -->
+    <script>
+        /*
+           1. USER REGISTRATIONS STATE
+        */
+        let registeredCompetitions = [];
+        let registeredWorkshops = [];
+
+        /*
+           2. THREE.JS 3D BALANCED ROARING LAVA FIRE & FLAME EMBERS ENGINE
+        */
+        let scene, camera, renderer;
+        let flameMesh, emberMesh;
+        let fireLight;
+        
+        const flameCount = 60;
+        const emberCount = 100;
+        
+        let flameData = [];
+        let emberData = [];
+
+        function createFlameTexture() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 128;
+            canvas.height = 128;
+            const ctx = canvas.getContext('2d');
+
+            const grad = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+            grad.addColorStop(0.0, 'rgba(255, 255, 240, 1.0)');
+            grad.addColorStop(0.18, 'rgba(255, 220, 50, 0.95)');
+            grad.addColorStop(0.42, 'rgba(255, 95, 0, 0.85)');
+            grad.addColorStop(0.70, 'rgba(215, 20, 0, 0.45)');
+            grad.addColorStop(0.92, 'rgba(120, 0, 0, 0.12)');
+            grad.addColorStop(1.0, 'rgba(0, 0, 0, 0.0)');
+
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 128, 128);
+            return new THREE.CanvasTexture(canvas);
+        }
+
+        function createEmberTexture() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 64;
+            canvas.height = 64;
+            const ctx = canvas.getContext('2d');
+
+            const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+            grad.addColorStop(0.0, 'rgba(255, 255, 255, 1.0)');
+            grad.addColorStop(0.25, 'rgba(255, 200, 30, 0.95)');
+            grad.addColorStop(0.60, 'rgba(255, 60, 0, 0.7)');
+            grad.addColorStop(1.0, 'rgba(0, 0, 0, 0.0)');
+
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 64, 64);
+            return new THREE.CanvasTexture(canvas);
+        }
+
+        function initAetherialParticles() {
+            const container = document.getElementById('aetherial-canvas');
+            if (!container) return;
+
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+            camera.position.z = 100;
+
+            renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            const flameTexture = createFlameTexture();
+            const emberTexture = createEmberTexture();
+
+            const flameGeo = new THREE.BufferGeometry();
+            const flamePositions = new Float32Array(flameCount * 3);
+            const flameColors = new Float32Array(flameCount * 3);
+
+            for (let i = 0; i < flameCount; i++) {
+                const idx = i * 3;
+                flamePositions[idx] = (Math.random() - 0.5) * 220;
+                flamePositions[idx + 1] = -70 + Math.random() * 140;
+                flamePositions[idx + 2] = (Math.random() - 0.5) * 80;
+
+                flameData.push({
+                    speedY: 0.12 + Math.random() * 0.18,
+                    speedX: (Math.random() - 0.5) * 0.05,
+                    turbulence: Math.random() * Math.PI * 2,
+                    baseX: flamePositions[idx],
+                    heatLife: Math.random()
+                });
+
+                flameColors[idx] = 1.0;
+                flameColors[idx + 1] = 0.35 + Math.random() * 0.45;
+                flameColors[idx + 2] = 0.05;
+            }
+
+            flameGeo.setAttribute('position', new THREE.BufferAttribute(flamePositions, 3));
+            flameGeo.setAttribute('color', new THREE.BufferAttribute(flameColors, 3));
+
+            const flameMat = new THREE.PointsMaterial({
+                size: 18,
+                map: flameTexture,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.52,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+
+            flameMesh = new THREE.Points(flameGeo, flameMat);
+            scene.add(flameMesh);
+
+            const emberGeo = new THREE.BufferGeometry();
+            const emberPositions = new Float32Array(emberCount * 3);
+            const emberColors = new Float32Array(emberCount * 3);
+
+            const emberPalette = [
+                new THREE.Color(0xffffff),
+                new THREE.Color(0xffd54f),
+                new THREE.Color(0xff6d00),
+                new THREE.Color(0xff1744)
+            ];
+
+            for (let i = 0; i < emberCount; i++) {
+                const idx = i * 3;
+                emberPositions[idx] = (Math.random() - 0.5) * 240;
+                emberPositions[idx + 1] = -75 + Math.random() * 150;
+                emberPositions[idx + 2] = (Math.random() - 0.5) * 110;
+
+                emberData.push({
+                    speedY: 0.18 + Math.random() * 0.28,
+                    driftFreq: 1.5 + Math.random() * 2.0,
+                    driftAmp: 0.05 + Math.random() * 0.08,
+                    phase: Math.random() * Math.PI * 2
+                });
+
+                const c = emberPalette[Math.floor(Math.random() * emberPalette.length)];
+                emberColors[idx] = c.r;
+                emberColors[idx + 1] = c.g;
+                emberColors[idx + 2] = c.b;
+            }
+
+            emberGeo.setAttribute('position', new THREE.BufferAttribute(emberPositions, 3));
+            emberGeo.setAttribute('color', new THREE.BufferAttribute(emberColors, 3));
+
+            const emberMat = new THREE.PointsMaterial({
+                size: 6.8,
+                map: emberTexture,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.85,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+
+            emberMesh = new THREE.Points(emberGeo, emberMat);
+            scene.add(emberMesh);
+
+            fireLight = new THREE.PointLight(0xff5500, 1.1, 140);
+            fireLight.position.set(0, -30, 40);
+            scene.add(fireLight);
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                const moveX = (e.clientX - window.innerWidth / 2) * 0.015;
+                const moveY = (e.clientY - window.innerHeight / 2) * 0.015;
+                if (flameMesh) {
+                    flameMesh.rotation.y = moveX * 0.02;
+                    flameMesh.rotation.x = moveY * 0.02;
+                }
+                if (emberMesh) {
+                    emberMesh.rotation.y = moveX * 0.03;
+                    emberMesh.rotation.x = moveY * 0.03;
+                }
+            });
+
+            animateFire();
+        }
+
+        let fireTime = 0;
+        function animateFire() {
+            requestAnimationFrame(animateFire);
+            fireTime += 0.03;
+
+            if (flameMesh) {
+                const pos = flameMesh.geometry.attributes.position.array;
+                const col = flameMesh.geometry.attributes.color.array;
+
+                for (let i = 0; i < flameCount; i++) {
+                    const idx = i * 3;
+                    const d = flameData[i];
+
+                    pos[idx + 1] += d.speedY;
+                    pos[idx] += Math.sin(fireTime * 1.5 + d.turbulence + pos[idx + 1] * 0.03) * 0.08;
+
+                    const heightRatio = (pos[idx + 1] + 70) / 145;
+                    col[idx] = 1.0;
+                    col[idx + 1] = Math.max(0.1, 0.9 - heightRatio * 0.85);
+                    col[idx + 2] = Math.max(0.0, 0.4 - heightRatio * 0.4);
+
+                    if (pos[idx + 1] > 75) {
+                        pos[idx + 1] = -75;
+                        pos[idx] = (Math.random() - 0.5) * 220;
+                        pos[idx + 2] = (Math.random() - 0.5) * 80;
+                    }
+                }
+                flameMesh.geometry.attributes.position.needsUpdate = true;
+                flameMesh.geometry.attributes.color.needsUpdate = true;
+            }
+
+            if (emberMesh) {
+                const pos = emberMesh.geometry.attributes.position.array;
+                for (let i = 0; i < emberCount; i++) {
+                    const idx = i * 3;
+                    const d = emberData[i];
+
+                    pos[idx + 1] += d.speedY;
+                    pos[idx] += Math.sin(fireTime * d.driftFreq + d.phase) * d.driftAmp;
+
+                    if (pos[idx + 1] > 80) {
+                        pos[idx + 1] = -80;
+                        pos[idx] = (Math.random() - 0.5) * 240;
+                        pos[idx + 2] = (Math.random() - 0.5) * 110;
+                    }
+                }
+                emberMesh.geometry.attributes.position.needsUpdate = true;
+            }
+
+            if (fireLight) {
+                fireLight.intensity = 1.0 + Math.sin(fireTime * 8) * 0.35 + Math.random() * 0.2;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        /*
+           3. CENTRALIZED SMOOTH FULL-PAGE VIEW SWITCHER (LIKE PROFILE)
+        */
+        const allViewIds = [
+            'main-site-view',
+            'profile-page-view',
+            'events-page-view',
+            'ces-page-view',
+            'contact-page-view',
+            'about-page-view',
+            'accommodation-page-view',
+            'workshops-page-view',
+            'competitions-page-view',
+            'ignite-page-view'
+        ];
+
+        function switchView(targetViewId) {
+            allViewIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.classList.add('hidden');
+                    el.classList.remove('fade-in-view');
+                }
+            });
+
+            const targetEl = document.getElementById(targetViewId);
+            if (targetEl) {
+                targetEl.classList.remove('hidden');
+                targetEl.classList.add('fade-in-view');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Handle Header Right Button
+            const userBtn = document.getElementById('user-profile-btn');
+            const signOutBtn = document.getElementById('sign-out-btn');
+            if (targetViewId === 'profile-page-view') {
+                userBtn.classList.add('hidden');
+                signOutBtn.classList.remove('hidden');
+                signOutBtn.classList.add('flex');
+            } else {
+                signOutBtn.classList.add('hidden');
+                signOutBtn.classList.remove('flex');
+                userBtn.classList.remove('hidden');
+            }
+
+            // Update Left Dock Active Highlights
+            document.querySelectorAll('.dock-btn').forEach(btn => btn.classList.remove('active-dock'));
+            if (targetViewId === 'main-site-view') document.getElementById('dock-home')?.classList.add('active-dock');
+            if (targetViewId === 'events-page-view') {
+                document.getElementById('dock-events')?.classList.add('active-dock');
+                renderEventsCalendar(1);
+            }
+            if (targetViewId === 'ces-page-view') document.getElementById('dock-ces')?.classList.add('active-dock');
+            if (targetViewId === 'contact-page-view') document.getElementById('dock-contact')?.classList.add('active-dock');
+            if (targetViewId === 'about-page-view') document.getElementById('dock-about')?.classList.add('active-dock');
+
+            if (targetViewId === 'profile-page-view') {
+                updateProfileDashboard();
+            }
+        }
+
+        /*
+           4. EVENTS VIEW DATA & LOGIC
+        */
+        const eventsSchedule = {
+            1: [
+                { time: '09:00 AM - 10:30 AM', title: 'Grand 30th Edition Inauguration', venue: 'Convocation Hall', tag: 'CEREMONY', desc: 'Opening address by Director of IIT Bombay and chief dignitaries.' },
+                { time: '11:00 AM - 12:30 PM', title: 'Keynote Summit: Space Horizons (ISRO)', venue: 'Convocation Hall', tag: 'KEYNOTE', desc: 'Pioneering planetary exploration and crewed spaceflight missions.' },
+                { time: '01:30 PM - 06:00 PM', title: 'International Robowars: 15kg Qualifiers', venue: 'Robowars Arena (Gymkhana)', tag: 'ROBOTICS', desc: 'Featherweight combat bots battle inside the fortified Lexan cage.' },
+                { time: '07:30 PM - 10:00 PM', title: 'Technoholix: Tron LED Illusions & Laser Symphony', venue: 'Open Air Theatre (OAT)', tag: 'NIGHTLINE', desc: 'High-energy cybernetic light show and pyro spectacle.' }
+            ],
+            2: [
+                { time: '10:00 AM - 01:30 PM', title: 'Meshmerize Autonomous Maze Championship', venue: 'Indoor Basketball Court', tag: 'ROBOTICS', desc: 'Line follower algorithmic robots solve dynamic branching grid mazes.' },
+                { time: '02:30 PM - 04:00 PM', title: 'Keynote Lecture: Sir Roger Penrose (Nobel Laureate)', venue: 'Main Auditorium', tag: 'SUMMIT', desc: 'Consciousness, quantum gravity and conformal cyclic cosmology.' },
+                { time: '04:30 PM - 08:30 PM', title: 'Robowars: 60kg Heavyweight Deathmatches', venue: 'Robowars Arena', tag: 'ROBOTICS', desc: 'Massive crushing spinners and pneumatic flippers clash in brutal combat.' },
+                { time: '08:15 PM - 10:00 PM', title: 'Technoholix: 1,000+ Drone Swarm Sky Symphony', venue: 'Powai Lakefront / OAT', tag: 'NIGHTLINE', desc: '1000 drones form massive 3D celestial sculptures over Powai lake.' }
+            ],
+            3: [
+                { time: '10:00 AM - 02:00 PM', title: 'Autonomous GenAI Hackathon Final Pitches', venue: 'VMCC Seminar Hall', tag: 'AI & CODING', desc: 'Top 10 finalist teams pitch autonomous AI agents to industry judges.' },
+                { time: '03:00 PM - 06:30 PM', title: 'Robowars Grand Championship Finale', venue: 'Robowars Arena', tag: 'ROBOTICS', desc: 'Championship battle for the ₹12,00,000 prize pool.' },
+                { time: '07:00 PM - 08:30 PM', title: 'Valedictory Ceremony & National Prize Distribution', venue: 'Convocation Hall', tag: 'CEREMONY', desc: 'Trophy presentation and honor roll for all 25+ competitions.' },
+                { time: '09:00 PM - 11:30 PM', title: 'Technoholix: Mega EDM Concert & Finale Festival Night', venue: 'Gymkhana Main Stage', tag: 'CONCERT', desc: 'World-renowned international artist closes the 30th edition with 100K+ crowd.' }
+            ]
+        };
+
+        function switchEventsDay(dayNum, btnEl) {
+            document.querySelectorAll('.ev-day-btn').forEach(b => {
+                b.className = 'ev-day-btn px-4 py-2 rounded-xl bg-black/60 text-slate-300 hover:text-white border border-white/20';
+            });
+            btnEl.className = 'ev-day-btn active px-4 py-2 rounded-xl bg-cyan-500 text-black font-bold border border-cyan-400 shadow-md';
+            renderEventsCalendar(dayNum);
+        }
+
+        function renderEventsCalendar(dayNum) {
+            const container = document.getElementById('events-day-container');
+            if (!container) return;
+            const items = eventsSchedule[dayNum] || [];
+
+            container.innerHTML = items.map(ev => `
+                <div class="view-themed-card p-5 rounded-2xl border border-cyan-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:border-cyan-400 transition">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2">
+                            <span class="cyan-tab-badge">${ev.tag}</span>
+                            <span class="font-mono text-xs text-cyan-300 font-bold">${ev.time}</span>
+                        </div>
+                        <h4 class="font-cinzel font-bold text-lg text-white mt-1">${ev.title}</h4>
+                        <p class="text-slate-300 text-xs font-grotesk">${ev.desc}</p>
+                        <div class="font-mono text-[11px] text-slate-400 flex items-center gap-1.5 pt-1">
+                            <i class="fas fa-location-dot text-cyan-400"></i> ${ev.venue}
+                        </div>
+                    </div>
+                    <button onclick="showToast('REMINDER SET: ${ev.title.toUpperCase()}');" class="self-end sm:self-auto px-4 py-2 bg-cyan-500/20 hover:bg-cyan-500 hover:text-black border border-cyan-400/40 rounded-xl text-xs font-mono font-bold transition whitespace-nowrap">
+                        <i class="fas fa-bell mr-1"></i> REMIND ME
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        /*
+           5. CONTACT US & TRANSMISSION LOGIC
+        */
+        function copySecretariatAddress() {
+            navigator.clipboard.writeText("Techfest Secretariat, Students Activity Centre (SAC), IIT Bombay, Powai, Mumbai - 400076, Maharashtra, India.");
+            showToast("SECRETARIAT ADDRESS COPIED TO CLIPBOARD");
+        }
+
+        function handleContactTransmission(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const dept = document.getElementById('contact-dept').value;
+            confetti({
+                particleCount: 85,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+            showToast(`DISPATCH RECEIVED FROM ${name.toUpperCase()} [ROUTED TO: ${dept.toUpperCase()}]`);
+            document.getElementById('contact-msg').value = '';
+        }
+
+        /*
+           6. PROFILE DASHBOARD & ELEMENT SWITCHING
+        */
+        function updateProfileDashboard() {
+            const compList = document.getElementById('user-competitions-list');
+            if (registeredCompetitions.length === 0) {
+                compList.innerHTML = 'No competition registrations yet.';
+                compList.className = 'p-6 text-center text-slate-400 font-mono text-xs';
+            } else {
+                compList.className = 'p-4 space-y-2 font-mono text-xs text-left';
+                compList.innerHTML = registeredCompetitions.map(c => `
+                    <div class="p-2.5 rounded-lg bg-red-950/40 border border-red-500/30 flex justify-between items-center">
+                        <span class="text-white font-bold">${c}</span>
+                        <span class="text-rose-400 text-[10px] font-bold">CONFIRMED</span>
+                    </div>
+                `).join('');
+            }
+
+            const wsList = document.getElementById('user-workshops-list');
+            if (registeredWorkshops.length === 0) {
+                wsList.innerHTML = 'No workshop registrations yet.';
+                wsList.className = 'p-6 text-center text-slate-400 font-mono text-xs';
+            } else {
+                wsList.className = 'p-4 space-y-2 font-mono text-xs text-left';
+                wsList.innerHTML = registeredWorkshops.map(w => `
+                    <div class="p-2.5 rounded-lg bg-red-950/40 border border-red-500/30 flex justify-between items-center">
+                        <span class="text-white font-bold">${w}</span>
+                        <span class="text-rose-400 text-[10px] font-bold">ENROLLED</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function changeSpiritElement(val) {
+            if (val === 'water') {
+                showToast('ELEMENT ALIGNED: CELESTIAL WATER LEVIATHAN');
+            } else if (val === 'lightning') {
+                showToast('ELEMENT ALIGNED: THUNDER FALCON');
+            } else if (val === 'earth') {
+                showToast('ELEMENT ALIGNED: OBSIDIAN GOLEM');
+            } else {
+                showToast('ELEMENT ALIGNED: CRIMSON FIRE KITSUNE');
+            }
+        }
+
+        /*
+           7. MODAL CONTROLS & UTILITIES
+        */
+        function openModal(id) {
+            const modal = document.getElementById(`modal-${id}`);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(`modal-${id}`);
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }
+        }
+
+        function scrollToPortal() {
+            const section = document.getElementById('section-portal');
+            if (section) section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleQuickMenu() {
+            const pop = document.getElementById('quick-hub-popover');
+            if (pop) {
+                if (pop.classList.contains('hidden')) {
+                    pop.classList.remove('hidden');
+                    pop.classList.add('flex');
+                } else {
+                    pop.classList.add('hidden');
+                    pop.classList.remove('flex');
+                }
+            }
+        }
+
+        function enrollAlert(track) {
+            if (!registeredWorkshops.includes(track)) {
+                registeredWorkshops.push(track);
+            }
+            confetti({
+                particleCount: 75,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+            showToast(`SEAT HELD FOR: ${track.toUpperCase()}`);
+            updateProfileDashboard();
+        }
+
+        function registerEventFromList(title) {
+            if (!registeredCompetitions.includes(title)) {
+                registeredCompetitions.push(title);
+            }
+            confetti({
+                particleCount: 80,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+            showToast(`REGISTERED FOR: ${title.toUpperCase()}`);
+            updateProfileDashboard();
+        }
+
+        function handleCombatRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('rw-team').value;
+            if (!registeredCompetitions.includes(`Robowars (${name})`)) {
+                registeredCompetitions.push(`Robowars (${name})`);
+            }
+            confetti({
+                particleCount: 100,
+                spread: 80,
+                origin: { y: 0.5 }
+            });
+            showToast(`TEAM '${name.toUpperCase()}' REGISTERED FOR ROBOWARS!`);
+            closeModal('robowars-reg');
+            updateProfileDashboard();
+        }
+
+        function handleCASubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('ca-input-name').value;
+            confetti({
+                particleCount: 90,
+                spread: 75,
+                origin: { y: 0.6 }
+            });
+            showToast(`WELCOME ${name.toUpperCase()}! CA ONBOARDING KIT DISPATCHED.`);
+            closeModal('ca-modal');
+        }
+
+        function handleAccommodationBooking(e) {
+            e.preventDefault();
+            const name = document.getElementById('accom-name').value;
+            const wing = document.getElementById('accom-wing').value;
+            const count = document.getElementById('accom-count').value;
+            confetti({
+                particleCount: 100,
+                spread: 80,
+                origin: { y: 0.5 }
+            });
+            showToast(`ACCOMMODATION CONFIRMED: ${name.toUpperCase()} (${count} GUEST/S) IN ${wing.toUpperCase()}`);
+        }
+
+        function filterWorkshopsCards(category, btn) {
+            document.querySelectorAll('.ws-filter-btn').forEach(b => {
+                b.className = 'ws-filter-btn px-3.5 py-1.5 rounded-xl bg-black/60 text-slate-300 hover:text-white border border-white/20';
+            });
+            btn.className = 'ws-filter-btn active px-3.5 py-1.5 rounded-xl bg-cyan-500 text-black font-bold border border-cyan-400';
+
+            const cards = document.querySelectorAll('.ws-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function handleIgnitePitch(e) {
+            e.preventDefault();
+            const venture = document.getElementById('ignite-startup-name').value;
+            const founder = document.getElementById('ignite-founder-name').value;
+            confetti({
+                particleCount: 110,
+                spread: 85,
+                origin: { y: 0.5 }
+            });
+            showToast(`VENTURE '${venture.toUpperCase()}' SUBMITTED FOR IGNITE SUMMIT! FOUNDER: ${founder.toUpperCase()}`);
+            document.getElementById('ignite-pitch-desc').value = '';
+        }
+
+        let toastTimer;
+        function showToast(msg) {
+            const toast = document.getElementById('tech-toast');
+            const text = document.getElementById('tech-toast-msg');
+            if (!toast || !text) return;
+            text.textContent = msg;
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+
+        window.addEventListener('load', () => {
+            initAetherialParticles();
+            renderEventsCalendar(1);
+        });
+    </script>
+</body>
+</html>
